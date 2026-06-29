@@ -22,10 +22,10 @@ Exit criteria:
 
 Goal: Help users see whether their loop system is ready for an agent.
 
-- Add a `validate` or `status` command.
+- Add `scripts/validate-loop-kit.sh`.
 - Check required `.loop/` files exist.
 - Detect empty critical sections.
-- Parse YAML loop maps.
+- Check loop map structure and parse YAML when Ruby is available.
 - Report missing evidence before developer review.
 
 Exit criteria:

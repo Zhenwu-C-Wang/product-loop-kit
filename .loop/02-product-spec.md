@@ -4,85 +4,86 @@ Created: 2026-06-29
 
 ## Slice
 
-- Name: v0.1 plain-file loop kit
+- Name: v0.2 validation and status
 - Owner: maintainer
 - Status: active
-- Related vision bet: Plain files plus a lightweight initializer can make loop engineering usable in any repo.
+- Related vision bet: A plain-file loop kit becomes more useful when users can verify whether `.loop/` is ready for an agent.
 
 ## Problem
 
-AI coding agents can iterate on code, but builders often lack a durable system for deciding what to build, giving bounded tasks to agents, collecting evidence, and feeding user feedback back into product direction.
+Product Loop Kit v0.1 can initialize a `.loop/` directory, but users still have to manually inspect whether the generated artifacts are complete enough to hand to a coding agent. Fresh templates should be useful as prompts, but they should not be mistaken for a ready product slice.
 
-Product Loop Kit v0.1 should make the first complete loop possible in a repo without installing a large toolchain.
+v0.2 should add a lightweight validation command that acts as a gate between "templates exist" and "agent can start."
 
 ## User Story
 
-As a product-minded engineer, I want to initialize a loop system in my repo and fill out a bounded product slice, so that my AI coding agent can implement against clear acceptance criteria and return evidence I can review.
+As a product-minded engineer, I want to validate my `.loop/` artifacts before handing work to an AI coding agent, so that missing files, unresolved placeholders, blank template rows, and incomplete evidence are caught early.
 
 ## Requirements
 
 | ID | Requirement | Priority | Notes |
 | --- | --- | --- | --- |
-| R1 | Provide a clear framework document explaining the three nested loops and control gates. | Must | Already present in `docs/loop-engineering-framework.md`; keep it aligned with templates. |
-| R2 | Provide reusable `.loop/` artifact templates for vision, spec, evals, agent task, PR evidence, developer review, external feedback, and decisions. | Must | Templates must be plain Markdown/YAML. |
-| R3 | Provide an initializer script that copies templates into a target repo without overwriting existing artifacts. | Must | Script should fail on missing target directory. |
-| R4 | Self-apply the framework to this repo with concrete v0.1 artifacts. | Must | This spec is part of that requirement. |
-| R5 | Provide at least one example product loop for a small 0-to-1 product. | Should | Current example: typing tutor. |
-| R6 | Provide a v0.x roadmap that identifies the next productization steps. | Should | Keep it short and linked from README. |
-| R7 | Add richer CLI features such as status, validation, and overwrite policy. | Later | Candidate for v0.2. |
+| R1 | Add a validation script that checks a target repo's `.loop/` directory. | Must | Implement as `scripts/validate-loop-kit.sh [target-dir]`. |
+| R2 | Check all 9 required loop artifacts exist. | Must | Missing files should fail clearly. |
+| R3 | Check loop map structure and parse YAML when Ruby is available. | Must | Avoid hard dependency beyond shell; Ruby parse is an extra strict check when available. |
+| R4 | Detect unresolved template placeholders, empty table rows, and blank bullets. | Must | Fresh initialized templates should fail until filled. |
+| R5 | Check critical sections and fields for vision, spec, eval plan, agent task, PR evidence, developer review, external feedback, and decision log. | Must | Keep rules simple and transparent. |
+| R6 | Document validation in README and roadmap. | Must | Make clear that fresh templates are expected to fail validation. |
+| R7 | Exercise success and failure paths. | Must | This repo should pass; missing `.loop/` and blank generated templates should fail. |
 
 ## Acceptance Criteria
 
 | ID | Criterion | Verification Method |
 | --- | --- | --- |
-| A1 | A user can run `./scripts/init-loop-kit.sh "Product Name" /path/to/repo` and receive 9 initialized loop artifacts. | Temporary-directory command check. |
-| A2 | The repo contains concrete self-application artifacts for v0.1 under `.loop/`. | Inspect `.loop/01-product-vision.md`, `.loop/02-product-spec.md`, `.loop/03-eval-plan.md`, and `.loop/04-agent-task.md`. |
-| A3 | Framework documentation, templates, and self-application artifacts use the same three-loop vocabulary. | `rg` inspection for loop names and artifact references. |
-| A4 | YAML artifacts parse successfully. | Ruby YAML parse or equivalent. |
-| A5 | The README points users to the framework, templates, example, script, and roadmap. | README inspection. |
+| A1 | `./scripts/validate-loop-kit.sh .` passes on this repo. | Command check. |
+| A2 | Validation fails clearly when `.loop/` is missing. | Temporary-directory command check. |
+| A3 | Validation fails clearly on a freshly initialized but unfilled `.loop/`. | Temporary-directory command check. |
+| A4 | Both shell scripts parse successfully. | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh`. |
+| A5 | README documents validation and explains that fresh templates fail until filled. | README inspection. |
 
 ## UX Notes
 
 - Entry point: `README.md`.
-- Main flow: Read framework, run initializer, fill vision/spec/eval/task, run agent, record evidence, review, then capture external feedback.
-- Empty state: Generated templates contain prompts and tables that show what to fill.
-- Error state: Initializer exits clearly if the template directory or target directory is missing.
-- Loading state: Not applicable for v0.1.
-- Accessibility: Plain Markdown and YAML should remain readable in terminals, GitHub, and editors.
-- Mobile/responsive behavior: Not applicable for v0.1.
+- Main flow: initialize `.loop/`, fill the first product slice, run validation, hand the task to an agent, record evidence.
+- Empty state: A fresh `.loop/` should produce actionable validation failures.
+- Error state: Missing target, missing `.loop/`, missing files, placeholders, and blank rows should be named clearly.
+- Loading state: Not applicable for shell script.
+- Accessibility: Output uses plain `pass:`, `warn:`, `fail:`, and `summary:` lines.
+- Mobile/responsive behavior: Not applicable.
 
 ## Data And State
 
-- Inputs: Project name, target repo path, template files.
-- Outputs: `.loop/` artifacts in the target repo.
-- State transitions: Draft vision -> implementable spec -> eval plan -> agent task -> PR evidence -> developer review -> external feedback -> decision log.
-- Persistence: Files are committed with the repo.
-- Privacy/security considerations: Artifacts may include user feedback or product strategy; teams should avoid committing secrets or sensitive raw customer data.
+- Inputs: Target repo path and `.loop/` artifacts.
+- Outputs: Terminal validation report and process exit status.
+- State transitions: initialized templates -> filled loop artifacts -> validation pass -> agent-ready task.
+- Persistence: No state is written by the validator.
+- Privacy/security considerations: Validator reads local files only and should not print sensitive artifact content.
 
 ## Instrumentation
 
 | Event/Metric | Trigger | Purpose |
 | --- | --- | --- |
-| Initialization success | Script creates 9 artifacts | Measures setup viability. |
-| First complete loop | PR evidence and developer review both filled | Measures real adoption. |
-| Repeated confusion | Same issue appears in feedback twice | Triggers doc/template update. |
+| Validation pass | Script exits 0 | Loop artifacts are ready for agent handoff. |
+| Validation fail | Script exits non-zero | User has actionable gaps to fill. |
+| Warning | Optional strict check cannot run | User sees reduced coverage without blocking. |
 
 ## Dependencies
 
-- POSIX shell and common Unix utilities for `scripts/init-loop-kit.sh`.
-- Ruby only for local YAML validation during development; not required by users.
+- Bash and common Unix utilities.
+- Ruby is optional for strict YAML parsing; loop map structure is still checked without it.
 
 ## Non-Goals
 
+- Full Markdown parsing.
+- Full YAML schema validation.
 - Package manager distribution.
 - Hosted dashboard.
-- Agent-specific MCP/server integration.
-- Automated analytics ingestion.
+- Agent-specific orchestration.
 
 ## Open Questions
 
 | Question | Owner | Needed By |
 | --- | --- | --- |
-| Should v0.1 include a `loop status` or `validate` command, or should that wait for v0.2? | Maintainer | Before public release |
-| Should `.loop/` be recommended as committed product memory, or should sensitive teams keep it private? | Maintainer | Before docs polish |
-| Which real product repo should be used as the first external adoption test? | Maintainer | Before v0.1 feedback loop |
+| Should validation support machine-readable JSON output? | Maintainer | v0.3 or CLI packaging |
+| Should validation rules be configurable per repo? | Maintainer | After real case-study feedback |
+| Should failed validation suggest exact template sections to edit? | Maintainer | v0.3 |

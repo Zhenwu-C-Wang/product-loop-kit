@@ -4,63 +4,64 @@ Created: 2026-06-29
 
 ## Summary
 
-- Slice: v0.1 plain-file loop kit self-application
+- Slice: v0.2 validation and status
 - Branch/PR: local working tree
 - Agent: Codex
 - Status: ready for developer review
 
 ## Changes
 
-- Initialized `.loop/` for this repository.
-- Replaced blank `.loop/` templates with concrete Product Loop Kit v0.1 vision, spec, eval plan, and agent task.
-- Added v0.x roadmap and linked it from README.
-- Recorded current evidence, review posture, external feedback plan, and decision log entries.
+- Added `scripts/validate-loop-kit.sh`.
+- Documented validation usage in README.
+- Updated roadmap to describe v0.2 validation behavior.
+- Updated `.loop/` spec, eval plan, and agent task for the validation slice.
 
 ## Acceptance Criteria Evidence
 
 | Criterion | Evidence | Status |
 | --- | --- | --- |
-| A1 | Initializer creates 9 artifacts in a temporary `.loop/` directory. | Complete |
-| A2 | `.loop/01-product-vision.md`, `.loop/02-product-spec.md`, `.loop/03-eval-plan.md`, and `.loop/04-agent-task.md` are filled with v0.1 content. | Complete |
-| A3 | Framework, templates, and self-application artifacts use the same three-loop vocabulary. | Complete |
-| A4 | YAML artifacts parse successfully. | Complete |
-| A5 | README points users to framework, templates, example, script, and roadmap. | Complete |
+| A1 | `./scripts/validate-loop-kit.sh .` passes on this repo with `63 passed, 0 warning(s), 0 failed`. | Complete |
+| A2 | Validator fails clearly when `.loop/` is missing with `.loop directory not found`. | Complete |
+| A3 | Validator fails clearly on freshly initialized but unfilled templates with `25 failed`. | Complete |
+| A4 | Both shell scripts parse successfully with `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh`. | Complete |
+| A5 | README documents validation and fresh-template failure behavior. | Complete |
 
 ## Checks Run
 
 | Check | Command/Method | Result | Notes |
 | --- | --- | --- | --- |
-| Self-initialization | `./scripts/init-loop-kit.sh "Product Loop Kit" .` | Pass | Created 9 `.loop/` artifacts. |
-| Shell syntax | `bash -n scripts/init-loop-kit.sh` | Pass | Initializer parses. |
-| Whitespace | `git diff --check` | Pass | No whitespace errors. |
+| Initial validator pass | `./scripts/validate-loop-kit.sh .` | Pass | Passed before final `.loop` evidence updates. |
+| Shell syntax | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh` | Pass | Both scripts parse. |
+| Validation pass | `./scripts/validate-loop-kit.sh .` | Pass | 63 passed, 0 warnings, 0 failed. |
+| Missing `.loop` failure | Validator against a fresh empty temp directory | Pass | Exits non-zero and reports `.loop directory not found`. |
+| Fresh template failure | Initialize temp repo, then validate before filling fields | Pass | Exits non-zero with 25 failures. |
+| Init smoke test | Temporary directory initialization | Pass | Generated 9 files and preserved `Demo/Product & Loop`. |
 | YAML parse | Ruby YAML parse for `.loop/00-loop-map.yaml`, `templates/00-loop-map.yaml`, and `examples/typing-tutor/loop-map.yaml` | Pass | YAML artifacts parse. |
-| Vocabulary inspection | `rg` for three-loop names and YAML loop keys | Pass | Framework vocabulary is present across docs, templates, examples, and `.loop/`. |
-| Init smoke test | Temporary directory initialization | Pass | Generated 9 files. |
-| Missing target test | Initializer with nonexistent path | Pass | Exits non-zero with `Target directory not found`. |
-| README path inspection | `test -e` for linked local paths | Pass | Framework, roadmap, templates, example, and script paths exist. |
+| Whitespace | `git diff --check` | Pass | No whitespace errors. |
+| README path inspection | `test -e` for linked local paths | Pass | Framework, roadmap, templates, example, and both scripts exist. |
 
 ## Product Inspection
 
 - Environment: local repo in Codex desktop.
-- Viewports/devices: not applicable for v0.1 plain-file kit.
+- Viewports/devices: not applicable for v0.2 shell script.
 - Screenshots/videos: not applicable.
-- Workflow notes: The kit now demonstrates its own framework through committed `.loop/` artifacts.
+- Workflow notes: The validator treats blank templates as incomplete, which preserves the difference between initialized and agent-ready.
 
 ## Risks And Tradeoffs
 
 | Risk | Impact | Mitigation/Next Step |
 | --- | --- | --- |
-| `.loop/` artifacts may be too detailed for first-time users. | Adoption may feel heavier than expected. | Test against one real product repo and trim fields that do not get used. |
-| Script remains minimal. | Users may want validation/status commands soon. | Move CLI polish into v0.2 roadmap. |
-| External feedback is not yet real. | Product direction still depends on maintainer assumptions. | Run a small peer review before v0.1 release. |
+| Validation rules may be too strict for some teams. | Valid but differently worded artifacts may fail. | Use real case studies before adding configurability. |
+| Validation rules may be too loose. | Incomplete artifacts may pass. | Add failure cases as repeated misses are found. |
+| Ruby YAML parsing is optional. | Users without Ruby get less strict YAML coverage. | Keep structural loop-map checks in shell; revisit dependencies when packaging. |
 
 ## Skipped Or Blocked Checks
 
 | Check | Reason | Owner |
 | --- | --- | --- |
-| Automated markdown link check | No markdown tooling in repo yet. | Maintainer |
+| Full Markdown AST validation | Out of scope for plain shell v0.2. | Maintainer |
 
 ## Questions For Developer Review
 
-- Should `.loop/` be presented as committed product memory by default?
-- Should v0.1 stay plain-file-only, or should a `loop validate` command be included before release?
+- Should v0.3 add JSON output for CI and agent consumption?
+- Should validation rules be configurable per repo, or remain opinionated until more case studies exist?

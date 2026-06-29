@@ -4,7 +4,7 @@ Created: 2026-06-29
 
 ## Goal
 
-Advance Product Loop Kit from framework draft to v0.1 working kit by self-applying `.loop/`, filling concrete v0.1 artifacts, adding a concise roadmap, and verifying the initializer workflow.
+Implement the v0.2 validation/status slice: add a shell validator that checks whether a repo's `.loop/` artifacts are complete enough for an AI coding agent, document it, and record evidence for success and failure paths.
 
 ## Inputs
 
@@ -13,54 +13,63 @@ Advance Product Loop Kit from framework draft to v0.1 working kit by self-applyi
 - Eval plan: `.loop/03-eval-plan.md`
 - Relevant files:
   - `README.md`
-  - `docs/loop-engineering-framework.md`
-  - `templates/`
+  - `docs/roadmap.md`
+  - `.loop/`
   - `scripts/init-loop-kit.sh`
-  - `examples/typing-tutor/`
+  - `scripts/validate-loop-kit.sh`
+  - `templates/`
 
 ## Scope
 
 In scope:
 
-- Initialize `.loop/` for this repo.
-- Fill v0.1 vision, spec, eval plan, agent task, PR evidence, developer review, external feedback digest, and decision log.
-- Add a short roadmap for v0.x productization.
-- Link the roadmap from README.
-- Run lightweight validation checks.
+- Add `scripts/validate-loop-kit.sh`.
+- Check required `.loop/` files exist.
+- Check loop map structure and optional YAML parse.
+- Detect unresolved placeholders, empty template table rows, and blank bullets.
+- Check core sections and filled fields for each `.loop` artifact.
+- Document validation in README and roadmap.
+- Run pass and failure-path checks.
+- Update `.loop/05-pr-evidence.md` with results.
 
 Out of scope:
 
-- Building a packaged CLI.
-- Creating a website or hosted dashboard.
-- Adding agent-platform-specific integrations.
-- Committing or pushing changes.
+- Packaged CLI distribution.
+- JSON output.
+- Configurable validation rules.
+- Hosted dashboard.
+- Full Markdown or YAML schema validation.
 
 ## Implementation Rules
 
-- Keep changes scoped to product-loop-kit artifacts and docs.
-- Prefer plain Markdown, YAML, and shell.
-- Do not silently change the three-loop framework vocabulary.
-- Add or update evals for repeated failure modes.
+- Keep the validator dependency-light and readable.
+- Do not modify user files during validation.
+- Do not print full artifact contents.
+- Keep failure messages tied to concrete files or rules.
+- Preserve the three-loop framework vocabulary.
 - Record evidence in `.loop/05-pr-evidence.md`.
 
 ## Commands To Run
 
 | Purpose | Command |
 | --- | --- |
-| Shell syntax | `bash -n scripts/init-loop-kit.sh` |
-| Whitespace | `git diff --check` |
+| Shell syntax | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh` |
+| Validation pass | `./scripts/validate-loop-kit.sh .` |
+| Missing `.loop` failure | `tmpdir="$(mktemp -d)"; ./scripts/validate-loop-kit.sh "$tmpdir"; rm -rf "$tmpdir"` |
+| Fresh template failure | `tmpdir="$(mktemp -d)"; ./scripts/init-loop-kit.sh "Blank Demo" "$tmpdir"; ./scripts/validate-loop-kit.sh "$tmpdir"; rm -rf "$tmpdir"` |
 | Init smoke test | `tmpdir="$(mktemp -d)"; ./scripts/init-loop-kit.sh "Demo/Product & Loop" "$tmpdir"; find "$tmpdir/.loop" -maxdepth 1 -type f | wc -l; rm -rf "$tmpdir"` |
 | YAML parse | `ruby -e 'require "yaml"; YAML.load_file(".loop/00-loop-map.yaml"); YAML.load_file("templates/00-loop-map.yaml"); YAML.load_file("examples/typing-tutor/loop-map.yaml")'` |
-| Repo status | `git status --short` |
+| Whitespace | `git diff --check` |
+| Repo status | `git status --short --untracked-files=all` |
 
 ## Working Loop
 
 1. Read the product spec and eval plan.
-2. Inspect the relevant repo files before editing.
-3. Implement the smallest coherent v0.1 productization slice.
+2. Inspect current scripts and docs.
+3. Implement the smallest coherent validator.
 4. Run required checks.
-5. Fix defects and repeat until checks pass or a blocker is clear.
-6. Fill out `.loop/05-pr-evidence.md`.
+5. Tighten or relax validation rules based on real output.
+6. Update documentation and evidence.
 
 ## Completion Contract
 

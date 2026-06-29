@@ -44,6 +44,14 @@ For this repo itself:
 ./scripts/init-loop-kit.sh "Product Loop Kit" .
 ```
 
+After filling the first product slice, validate that the loop artifacts are ready for an agent:
+
+```bash
+./scripts/validate-loop-kit.sh /path/to/product-repo
+```
+
+A freshly initialized `.loop/` is expected to fail validation until the critical fields are filled.
+
 ## How To Use It
 
 1. Start with `01-product-vision.md`: state the user, the context advantage the human brings, and the current product bet.
@@ -61,6 +69,7 @@ For this repo itself:
 - [templates/](templates): reusable artifacts for each loop.
 - [examples/typing-tutor/](examples/typing-tutor): example loop setup for a small 0-to-1 product.
 - [scripts/init-loop-kit.sh](scripts/init-loop-kit.sh): copies templates into a target repo.
+- [scripts/validate-loop-kit.sh](scripts/validate-loop-kit.sh): checks whether `.loop/` is ready for an agent task.
 
 ## License
 
