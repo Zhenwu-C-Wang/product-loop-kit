@@ -1,0 +1,85 @@
+project: "{{PROJECT_NAME}}"
+created_at: "{{DATE}}"
+
+north_star:
+  target_user: ""
+  job_to_be_done: ""
+  product_bet: ""
+  human_context_advantage:
+    - ""
+
+loops:
+  agentic_coding:
+    cadence: "5-30 minutes per inner iteration"
+    owner: "AI coding agent"
+    core_question: "Does the implementation satisfy the spec and evals?"
+    inputs:
+      - "02-product-spec.md"
+      - "03-eval-plan.md"
+      - "04-agent-task.md"
+      - "codebase"
+    outputs:
+      - "code changes"
+      - "05-pr-evidence.md"
+      - "updated evals"
+    gate:
+      accept: "Required checks pass and evidence covers acceptance criteria."
+      retry: "Failure is local and fix path is clear."
+      escalate: "Spec, dependency, or product decision is blocked."
+
+  developer_feedback:
+    cadence: "30-120 minutes"
+    owner: "developer"
+    core_question: "Is the product moving toward the intended user experience and product bet?"
+    inputs:
+      - "current build"
+      - "05-pr-evidence.md"
+      - "01-product-vision.md"
+      - "07-external-feedback-digest.md"
+    outputs:
+      - "06-developer-review.md"
+      - "revised spec"
+      - "next agent task"
+      - "08-decision-log.md"
+    gate:
+      accept: "Slice is useful, coherent, and supported by evidence."
+      iterate: "Target improvement is clear and worth another loop."
+      change_spec: "Implementation revealed ambiguity."
+      change_vision: "Human context or external feedback changes the bet."
+
+  external_feedback:
+    cadence: "hours to weeks"
+    owner: "developer/product team"
+    core_question: "Are we solving the right problem for the right people?"
+    inputs:
+      - "alpha/beta usage"
+      - "customer conversations"
+      - "analytics"
+      - "support/sales notes"
+      - "competitive analysis"
+    outputs:
+      - "07-external-feedback-digest.md"
+      - "updated product vision"
+      - "prioritized product bets"
+      - "08-decision-log.md"
+    gate:
+      continue: "Feedback strengthens the current bet."
+      refine: "Need is real but solution is wrong."
+      pivot: "Target user, problem, or distribution path is invalidated."
+      pause: "Next action would not produce new learning."
+
+control_rules:
+  - "No agent task starts without acceptance criteria."
+  - "No merge happens without evidence."
+  - "No repeated failure mode survives twice without becoming an eval."
+  - "No vision change happens without a stated source."
+  - "No external feedback enters the backlog without interpretation and confidence."
+  - "Every loop ends in accept, retry, escalate, stop, or ship."
+
+metrics:
+  agent_loop_time: ""
+  review_latency: ""
+  eval_coverage: ""
+  spec_churn: ""
+  external_learning_rate: ""
+  human_leverage: ""

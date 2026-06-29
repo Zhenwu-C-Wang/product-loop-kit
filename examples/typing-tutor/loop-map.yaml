@@ -1,0 +1,63 @@
+project: "Typing Tutor"
+created_at: "2026-06-29"
+
+north_star:
+  target_user: "A young learner practicing keyboard fluency with help from a parent or teacher."
+  job_to_be_done: "Make short daily typing practice feel clear, rewarding, and easy to supervise."
+  product_bet: "A guided practice loop with visible progress and adult controls will increase practice consistency."
+  human_context_advantage:
+    - "The learner needs short sessions and immediate feedback."
+    - "The adult needs a simple way to adjust difficulty without interrupting practice."
+
+loops:
+  agentic_coding:
+    cadence: "10-20 minutes per implementation pass"
+    owner: "AI coding agent"
+    core_question: "Can the practice flow meet the current spec and pass checks?"
+    inputs:
+      - "practice-flow spec"
+      - "typing accuracy eval"
+      - "browser inspection checklist"
+    outputs:
+      - "working practice screen"
+      - "test results"
+      - "screenshots"
+    gate:
+      accept: "Practice flow works, progress updates correctly, and evidence covers acceptance criteria."
+      retry: "UI or state defect has a clear local fix."
+      escalate: "Reward, content, or adult-control behavior needs a product decision."
+
+  developer_feedback:
+    cadence: "Every completed practice-flow slice"
+    owner: "developer"
+    core_question: "Does this feel useful and calm for both learner and adult?"
+    inputs:
+      - "current build"
+      - "agent evidence"
+      - "learner context"
+    outputs:
+      - "revised spec"
+      - "next agent task"
+      - "new evals for repeated mistakes"
+    gate:
+      accept: "The flow is simple enough for the learner and gives the adult the needed control."
+      iterate: "A small visual, flow, or state change would materially improve the experience."
+      change_spec: "The implemented interaction reveals missing product detail."
+      change_vision: "Feedback changes the practice model."
+
+  external_feedback:
+    cadence: "After a usable session can be completed"
+    owner: "developer"
+    core_question: "Does the product improve practice consistency outside the builder's assumptions?"
+    inputs:
+      - "observed practice sessions"
+      - "adult feedback"
+      - "session completion data"
+    outputs:
+      - "feedback digest"
+      - "updated learning loop"
+      - "next product bet"
+    gate:
+      continue: "Learners complete sessions and adults understand the controls."
+      refine: "Practice is useful but motivation or difficulty needs adjustment."
+      pivot: "The core session model does not fit real use."
