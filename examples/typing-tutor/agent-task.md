@@ -8,12 +8,11 @@ Build the first usable typing practice slice: a learner can complete one short p
 
 ## Inputs
 
-- Vision: help a young learner build keyboard fluency through short supervised sessions.
-- Spec: one practice screen, one result screen, one adult settings panel.
-- Eval plan:
-  - Unit test scoring logic.
-  - Browser check for practice completion.
-  - Responsive check for desktop and tablet widths.
+- Product vision: `product-vision.md`
+- Product spec: `product-spec.md`
+- Eval plan: `eval-plan.md`
+- External feedback digest: `external-feedback-digest.md`
+- PR evidence contract: `pr-evidence.md`
 
 ## Scope
 

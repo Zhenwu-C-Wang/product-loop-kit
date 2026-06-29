@@ -6,65 +6,62 @@ Created: 2026-06-29
 
 This eval plan covers:
 
-- Product slice: v0.2 validation and status.
-- Critical workflows: validate this repo, detect missing `.loop/`, detect unfilled fresh templates, keep initializer behavior working, and preserve README/roadmap guidance.
-- Known risks: validation rules may be too strict, too loose, or accidentally depend on tooling users do not have.
+- Product slice: v0.3 reference case study.
+- Critical workflows: find the case study from README, inspect the typing-tutor artifacts, verify the case study spans all three loops, and keep validator status passing.
+- Known risks: overclaiming real external validation, duplicating template content without showing decisions, or creating artifacts that are too abstract to reuse.
 
 ## Required Checks
 
 | Check | Command/Method | Required For Merge | Notes |
 | --- | --- | --- | --- |
-| Shell syntax | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh` | Yes | Verifies both scripts parse. |
-| Validation pass | `./scripts/validate-loop-kit.sh .` | Yes | This repo should pass. |
-| Missing `.loop` failure | Run validator against a new empty temp directory | Yes | Must exit non-zero and name missing `.loop`. |
-| Fresh template failure | Initialize temp repo, then run validator before filling fields | Yes | Must exit non-zero on unresolved/blank template content. |
-| Init smoke test | Run initializer against `mktemp -d` and count generated files | Yes | Must still generate 9 files. |
-| YAML parse | `ruby -e 'require "yaml"; YAML.load_file(...)'` | Yes | Applies to `.loop/00-loop-map.yaml`, `templates/00-loop-map.yaml`, and examples. |
+| Validator pass | `./scripts/validate-loop-kit.sh .` | Yes | This repo's `.loop/` must stay complete. |
+| Shell syntax | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh` | Yes | Existing scripts must keep parsing. |
 | Whitespace check | `git diff --check` | Yes | Catches trailing whitespace and patch issues. |
-| README path inspection | `test -e` for linked local paths | Yes | Ensure referenced files exist. |
+| YAML parse | Ruby YAML parse for loop maps | Yes | Applies to `.loop`, template, and typing-tutor loop maps. |
+| Case-study file check | `test -f examples/typing-tutor/case-study.md` | Yes | Confirms the entry point exists. |
+| Artifact file check | `test -f` for typing-tutor vision, feedback, spec, eval, task, evidence, and review files | Yes | Confirms full example package exists. |
+| README inspection | Manual or `rg` path check | Yes | README should link directly to the case study. |
 
 ## Acceptance Coverage
 
 | Acceptance Criterion | Eval Or Check | Evidence Expected |
 | --- | --- | --- |
-| A1 | Validation pass | Validator exits 0 on this repo. |
-| A2 | Missing `.loop` failure | Validator exits non-zero and reports `.loop directory not found`. |
-| A3 | Fresh template failure | Validator exits non-zero and reports placeholder or blank template failures. |
-| A4 | Shell syntax | Both scripts parse with `bash -n`. |
-| A5 | README inspection | README documents validation and fresh-template failure behavior. |
+| A1 | Case-study inspection | Case study describes external, developer, and agentic loops. |
+| A2 | Artifact file check | Example contains all required loop artifacts. |
+| A3 | README inspection | README links to `examples/typing-tutor/case-study.md`. |
+| A4 | Roadmap inspection | Roadmap says reference case study, not real external adoption. |
+| A5 | Validator pass | Validator exits 0 with no failed checks. |
 
 ## Manual Review Checklist
 
-- [ ] Validator output is readable without extra tooling.
-- [ ] Failure messages point to concrete `.loop/` files.
-- [ ] Rules catch fresh blank templates.
-- [ ] Rules do not print sensitive artifact body content.
-- [ ] README makes validation timing clear.
-- [ ] Roadmap reflects v0.2 implementation without overclaiming.
+- [ ] Case study has a clear starting signal.
+- [ ] External feedback changes the product slice before coding.
+- [ ] Product spec has bounded acceptance criteria.
+- [ ] Eval plan turns likely failures into checks.
+- [ ] PR evidence distinguishes required future evidence from completed evidence.
+- [ ] Developer review names the next loop.
+- [ ] README and roadmap use accurate language.
 
 ## Regression Evals
 
-Add an eval when the same defect appears twice.
-
 | Defect Pattern | Eval Added | Owner | Date |
 | --- | --- | --- | --- |
-| Validator misses fresh blank templates | Keep fresh-template failure test | Maintainer | 2026-06-29 |
-| Validator blocks valid self-application artifacts | Keep pass test on this repo | Maintainer | 2026-06-29 |
-| README mentions a removed script path | Keep README path inspection | Maintainer | 2026-06-29 |
+| Case study overclaims real user evidence | Roadmap and case-study wording inspection | Maintainer | 2026-06-29 |
+| Example omits a loop artifact | Artifact file check | Maintainer | 2026-06-29 |
+| Self-application artifacts drift from validator rules | Validator pass on this repo | Maintainer | 2026-06-29 |
 
 ## Test Data
 
 | Scenario | Input/Data | Expected Result |
 | --- | --- | --- |
-| Valid repo | `.` | Validator exits 0. |
-| Missing `.loop` | New empty temp directory | Validator exits non-zero. |
-| Blank templates | Temp directory initialized with `init-loop-kit.sh` | Validator exits non-zero. |
-| Init still works | `Demo/Product & Loop`, `mktemp -d` | Initializer creates 9 files and preserves project name. |
+| Case-study link | README repo map | Link points to existing case-study file. |
+| Example artifact set | `examples/typing-tutor/` | Contains vision, feedback, spec, eval, task, evidence, review, case study, and loop map. |
+| Self validation | Current repo | Validator passes. |
 
 ## Evidence Required From Agent
 
 - Commands run and results.
-- Success and failure-path output summaries.
-- File list for changed artifacts.
-- Notes for skipped checks or warnings.
+- File list for typing-tutor artifacts.
+- README/roadmap inspection notes.
+- Validator summary.
 - Known risks or unverified assumptions.

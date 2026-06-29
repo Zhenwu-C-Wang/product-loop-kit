@@ -34,18 +34,18 @@ Exit criteria:
 - Validation fails clearly on a missing or incomplete `.loop/` setup.
 - README documents the command in the quick start.
 
-## v0.3 Real Case Studies
+## v0.3 Reference Case Study
 
-Goal: Prove the kit works outside this repository.
+Goal: Show what a complete product loop looks like before asking users to apply the kit to their own repos.
 
-- Apply the kit to at least one real product repo.
+- Apply the kit to at least one product example or real product repo.
 - Capture the full path from external feedback to spec, eval, agent task, PR evidence, and developer review.
 - Remove or simplify template fields that remain unused.
 - Add one short case-study doc.
 
 Exit criteria:
 
-- A real product loop completes end to end.
+- A reference product loop is documented end to end.
 - At least one repeated failure mode becomes an eval.
 - External feedback changes either the product vision or next spec.
 

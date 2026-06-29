@@ -4,7 +4,7 @@ Created: 2026-06-29
 
 ## Goal
 
-Implement the v0.2 validation/status slice: add a shell validator that checks whether a repo's `.loop/` artifacts are complete enough for an AI coding agent, document it, and record evidence for success and failure paths.
+Implement the v0.3 reference case-study slice by expanding `examples/typing-tutor/` into a complete loop engineering example and linking it from the repo docs.
 
 ## Inputs
 
@@ -15,61 +15,54 @@ Implement the v0.2 validation/status slice: add a shell validator that checks wh
   - `README.md`
   - `docs/roadmap.md`
   - `.loop/`
-  - `scripts/init-loop-kit.sh`
+  - `examples/typing-tutor/`
   - `scripts/validate-loop-kit.sh`
-  - `templates/`
 
 ## Scope
 
 In scope:
 
-- Add `scripts/validate-loop-kit.sh`.
-- Check required `.loop/` files exist.
-- Check loop map structure and optional YAML parse.
-- Detect unresolved placeholders, empty template table rows, and blank bullets.
-- Check core sections and filled fields for each `.loop` artifact.
-- Document validation in README and roadmap.
-- Run pass and failure-path checks.
-- Update `.loop/05-pr-evidence.md` with results.
+- Add typing-tutor product vision, external feedback digest, product spec, eval plan, PR evidence, developer review, and case-study docs.
+- Update the existing typing-tutor agent task to reference the new artifacts.
+- Link the case study from README.
+- Update roadmap language for v0.3.
+- Update `.loop/05-pr-evidence.md`, `.loop/06-developer-review.md`, and `.loop/08-decision-log.md`.
+- Run validation and file checks.
 
 Out of scope:
 
-- Packaged CLI distribution.
-- JSON output.
-- Configurable validation rules.
-- Hosted dashboard.
-- Full Markdown or YAML schema validation.
+- Implementing the typing tutor app.
+- Claiming real learner/adult feedback has been collected.
+- Adding package distribution.
+- Adding screenshots for a non-existent implementation.
 
 ## Implementation Rules
 
-- Keep the validator dependency-light and readable.
-- Do not modify user files during validation.
-- Do not print full artifact contents.
-- Keep failure messages tied to concrete files or rules.
+- Keep the case study concrete and honest about what is synthesized versus implemented.
 - Preserve the three-loop framework vocabulary.
+- Prefer plain Markdown/YAML.
+- Do not weaken validator rules to make the example pass; the validator checks this repo's `.loop`, not the example package.
 - Record evidence in `.loop/05-pr-evidence.md`.
 
 ## Commands To Run
 
 | Purpose | Command |
 | --- | --- |
+| Validator pass | `./scripts/validate-loop-kit.sh .` |
 | Shell syntax | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh` |
-| Validation pass | `./scripts/validate-loop-kit.sh .` |
-| Missing `.loop` failure | `tmpdir="$(mktemp -d)"; ./scripts/validate-loop-kit.sh "$tmpdir"; rm -rf "$tmpdir"` |
-| Fresh template failure | `tmpdir="$(mktemp -d)"; ./scripts/init-loop-kit.sh "Blank Demo" "$tmpdir"; ./scripts/validate-loop-kit.sh "$tmpdir"; rm -rf "$tmpdir"` |
-| Init smoke test | `tmpdir="$(mktemp -d)"; ./scripts/init-loop-kit.sh "Demo/Product & Loop" "$tmpdir"; find "$tmpdir/.loop" -maxdepth 1 -type f | wc -l; rm -rf "$tmpdir"` |
-| YAML parse | `ruby -e 'require "yaml"; YAML.load_file(".loop/00-loop-map.yaml"); YAML.load_file("templates/00-loop-map.yaml"); YAML.load_file("examples/typing-tutor/loop-map.yaml")'` |
 | Whitespace | `git diff --check` |
+| YAML parse | `ruby -e 'require "yaml"; YAML.load_file(".loop/00-loop-map.yaml"); YAML.load_file("templates/00-loop-map.yaml"); YAML.load_file("examples/typing-tutor/loop-map.yaml")'` |
+| Example file check | `find examples/typing-tutor -maxdepth 1 -type f | sort` |
+| README case-study link | `rg "examples/typing-tutor/case-study.md" README.md` |
 | Repo status | `git status --short --untracked-files=all` |
 
 ## Working Loop
 
-1. Read the product spec and eval plan.
-2. Inspect current scripts and docs.
-3. Implement the smallest coherent validator.
-4. Run required checks.
-5. Tighten or relax validation rules based on real output.
-6. Update documentation and evidence.
+1. Inspect the current example.
+2. Add the missing loop artifacts.
+3. Tie the case study back to README and roadmap.
+4. Update this repo's `.loop` evidence.
+5. Run validation and file checks.
 
 ## Completion Contract
 
