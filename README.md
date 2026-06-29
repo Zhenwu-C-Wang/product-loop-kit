@@ -4,6 +4,14 @@ Product Loop Kit is a plain-file operating system for building products with AI 
 
 It turns product vision, user feedback, evals, agent tasks, PR evidence, and human review into a repeatable loop that can live inside any software repo.
 
+<p align="center">
+  <img src="examples/typing-tutor/prototype/screenshots/desktop-result.png" alt="Typing Tutor prototype screenshot showing a completed typing practice result" width="900">
+</p>
+
+<p align="center">
+  <strong>From external feedback to spec, evals, agent task, implementation evidence, and developer review.</strong>
+</p>
+
 ## Why This Exists
 
 AI coding agents are good at iterating on code when the work is bounded and verifiable. They are much weaker when product intent, user context, acceptance criteria, and review evidence live only in chat history.
@@ -17,6 +25,41 @@ Product Loop Kit makes those loops explicit:
 | External feedback loop | Hours to weeks | Users, customers, market | Are we solving the right problem for the right people? |
 
 The goal is not to automate humans out of product work. The goal is to preserve human context advantage while giving agents enough structure to execute independently.
+
+## Visual Overview
+
+```mermaid
+flowchart TB
+  External["External Feedback Loop<br/>users, data, market signals"] --> Vision["Product Vision<br/>target user, product bet, context advantage"]
+  Vision --> Spec["Product Spec<br/>requirements, non-goals, acceptance criteria"]
+  Spec --> Evals["Eval Plan<br/>checks, fixtures, review checklist"]
+  Evals --> Task["Agent Task<br/>scope, commands, completion contract"]
+  Task --> Evidence["PR Evidence<br/>tests, screenshots, risks, questions"]
+  Evidence --> Review["Developer Review<br/>accept, iterate, change spec, change vision"]
+  Review --> Spec
+  Review --> Vision
+  Evidence --> External
+```
+
+```mermaid
+flowchart LR
+  A["01<br/>Vision"] --> B["02<br/>Spec"]
+  B --> C["03<br/>Eval Plan"]
+  C --> D["04<br/>Agent Task"]
+  D --> E["05<br/>PR Evidence"]
+  E --> F["06<br/>Developer Review"]
+  F --> G["07<br/>External Feedback"]
+  G --> H["08<br/>Decision Log"]
+  H --> A
+```
+
+## What The Loop Produces
+
+| Product Memory | Agent Handoff | Review Evidence |
+| --- | --- | --- |
+| Product vision and human context advantage | Bounded task with scope and commands | Test results, screenshots, risks |
+| External feedback digest | Acceptance criteria and eval plan | Developer review and decision log |
+| Roadmap and product bets | Clear non-goals | Next loop decision |
 
 ## Start Here
 
@@ -92,6 +135,14 @@ The Typing Tutor example shows the framework end to end:
 - Runnable static prototype
 - PR evidence
 - Developer review
+
+<p align="center">
+  <img src="examples/typing-tutor/assets/typing-tutor-concept.png" alt="Typing Tutor visual concept" width="720">
+</p>
+
+<p align="center">
+  <img src="examples/typing-tutor/prototype/screenshots/tablet-result.png" alt="Typing Tutor tablet screenshot with medium difficulty selected" width="420">
+</p>
 
 Open the prototype directly:
 
