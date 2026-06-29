@@ -1,0 +1,89 @@
+project: "Product Loop Kit"
+created_at: "2026-06-29"
+
+north_star:
+  target_user: "Product-minded engineers using AI coding agents to build 0-to-1 products."
+  job_to_be_done: "Turn fuzzy user feedback and product intent into bounded agent tasks with evidence and review gates."
+  product_bet: "A lightweight artifact system can make agentic product development more repeatable without slowing builders down."
+  human_context_advantage:
+    - "The builder knows the target user, domain constraints, and product taste that the AI agent lacks."
+    - "The builder can decide when a local implementation loop is no longer the right source of learning."
+    - "The builder can translate external signals into product bets rather than raw backlog items."
+
+loops:
+  agentic_coding:
+    cadence: "5-30 minutes per inner iteration"
+    owner: "AI coding agent"
+    core_question: "Does the implementation or documentation change satisfy the spec and evidence contract?"
+    inputs:
+      - ".loop/02-product-spec.md"
+      - ".loop/03-eval-plan.md"
+      - ".loop/04-agent-task.md"
+      - "README.md"
+      - "docs/loop-engineering-framework.md"
+      - "templates/"
+      - "scripts/init-loop-kit.sh"
+    outputs:
+      - "repo changes"
+      - ".loop/05-pr-evidence.md"
+      - "updated templates or checks"
+    gate:
+      accept: "Required checks pass and evidence covers every acceptance criterion."
+      retry: "Failure is local, reproducible, and fixable without changing product direction."
+      escalate: "The product positioning, artifact shape, or distribution model needs a human decision."
+
+  developer_feedback:
+    cadence: "Every coherent repo slice"
+    owner: "developer"
+    core_question: "Is Product Loop Kit becoming a usable operating system rather than a static essay?"
+    inputs:
+      - "current repo state"
+      - ".loop/05-pr-evidence.md"
+      - ".loop/01-product-vision.md"
+      - ".loop/07-external-feedback-digest.md"
+    outputs:
+      - ".loop/06-developer-review.md"
+      - "revised specs"
+      - "next agent task"
+      - ".loop/08-decision-log.md"
+    gate:
+      accept: "The slice makes the kit easier to adopt and keeps the framework coherent."
+      iterate: "A small doc, template, or script improvement would materially improve first use."
+      change_spec: "Implementation reveals a missing artifact, check, or adoption path."
+      change_vision: "Feedback shows the target user or product bet should change."
+
+  external_feedback:
+    cadence: "After each usable release or demo"
+    owner: "developer/product-minded engineer"
+    core_question: "Do real builders understand and reuse the loop system in their own product repos?"
+    inputs:
+      - "friend/advisor review"
+      - "GitHub issues"
+      - "usage notes from applying the kit to a real repo"
+      - "competitive examples of AI agent workflows"
+    outputs:
+      - ".loop/07-external-feedback-digest.md"
+      - "updated product vision"
+      - "prioritized v0.x specs"
+      - ".loop/08-decision-log.md"
+    gate:
+      continue: "Users can initialize the kit and understand the three loops without hand-holding."
+      refine: "The need is real but templates, naming, or onboarding are confusing."
+      pivot: "Users want a different shape: CLI-first, GitHub app, dashboard, or agent prompt pack."
+      pause: "More local polishing will not answer the adoption question."
+
+control_rules:
+  - "No new template ships without a corresponding purpose in the framework doc."
+  - "No CLI/script behavior changes ship without a quick command-level verification."
+  - "No repeated confusion from users survives twice without becoming a doc or template change."
+  - "No product vision change happens without a stated source."
+  - "No external feedback enters the roadmap without interpretation and confidence."
+  - "Every repo iteration ends in accept, retry, escalate, stop, or release."
+
+metrics:
+  agent_loop_time: "Can a bounded doc/script slice reach evidence in under one hour?"
+  review_latency: "Can a developer review the generated artifacts in under 15 minutes?"
+  eval_coverage: "Do scripts, templates, and examples have lightweight checks?"
+  spec_churn: "Are template changes reducing ambiguity rather than adding ceremony?"
+  external_learning_rate: "Does each demo or usage attempt produce a clearer v0.x priority?"
+  human_leverage: "Does the builder spend more time deciding direction than formatting agent prompts?"

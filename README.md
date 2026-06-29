@@ -57,6 +57,7 @@ For this repo itself:
 ## Repository Map
 
 - [docs/loop-engineering-framework.md](docs/loop-engineering-framework.md): the operating model and loop contracts.
+- [docs/roadmap.md](docs/roadmap.md): the v0.x path from plain files to validation and case studies.
 - [templates/](templates): reusable artifacts for each loop.
 - [examples/typing-tutor/](examples/typing-tutor): example loop setup for a small 0-to-1 product.
 - [scripts/init-loop-kit.sh](scripts/init-loop-kit.sh): copies templates into a target repo.
