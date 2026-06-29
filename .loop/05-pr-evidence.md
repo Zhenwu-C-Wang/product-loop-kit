@@ -7,7 +7,7 @@ Created: 2026-06-29
 - Slice: v0.1 plain-file loop kit self-application
 - Branch/PR: local working tree
 - Agent: Codex
-- Status: in progress
+- Status: ready for developer review
 
 ## Changes
 
@@ -20,18 +20,24 @@ Created: 2026-06-29
 
 | Criterion | Evidence | Status |
 | --- | --- | --- |
-| A1 | Initializer creates 9 artifacts in a temporary `.loop/` directory. | Pending final check |
+| A1 | Initializer creates 9 artifacts in a temporary `.loop/` directory. | Complete |
 | A2 | `.loop/01-product-vision.md`, `.loop/02-product-spec.md`, `.loop/03-eval-plan.md`, and `.loop/04-agent-task.md` are filled with v0.1 content. | Complete |
-| A3 | Framework, templates, and self-application artifacts use the same three-loop vocabulary. | Pending final inspection |
-| A4 | YAML artifacts parse successfully. | Pending final check |
-| A5 | README points users to framework, templates, example, script, and roadmap. | Pending final inspection |
+| A3 | Framework, templates, and self-application artifacts use the same three-loop vocabulary. | Complete |
+| A4 | YAML artifacts parse successfully. | Complete |
+| A5 | README points users to framework, templates, example, script, and roadmap. | Complete |
 
 ## Checks Run
 
 | Check | Command/Method | Result | Notes |
 | --- | --- | --- | --- |
 | Self-initialization | `./scripts/init-loop-kit.sh "Product Loop Kit" .` | Pass | Created 9 `.loop/` artifacts. |
-| Final validation | See completion summary | Pending | To be updated after final checks. |
+| Shell syntax | `bash -n scripts/init-loop-kit.sh` | Pass | Initializer parses. |
+| Whitespace | `git diff --check` | Pass | No whitespace errors. |
+| YAML parse | Ruby YAML parse for `.loop/00-loop-map.yaml`, `templates/00-loop-map.yaml`, and `examples/typing-tutor/loop-map.yaml` | Pass | YAML artifacts parse. |
+| Vocabulary inspection | `rg` for three-loop names and YAML loop keys | Pass | Framework vocabulary is present across docs, templates, examples, and `.loop/`. |
+| Init smoke test | Temporary directory initialization | Pass | Generated 9 files. |
+| Missing target test | Initializer with nonexistent path | Pass | Exits non-zero with `Target directory not found`. |
+| README path inspection | `test -e` for linked local paths | Pass | Framework, roadmap, templates, example, and script paths exist. |
 
 ## Product Inspection
 
