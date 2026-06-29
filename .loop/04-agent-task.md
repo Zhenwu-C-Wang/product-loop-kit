@@ -4,7 +4,7 @@ Created: 2026-06-29
 
 ## Goal
 
-Implement the v0.3 reference case-study slice by expanding `examples/typing-tutor/` into a complete loop engineering example and linking it from the repo docs.
+Organize Product Loop Kit so it can be sent directly to reviewers: tighten the README, add a repo tour, add a share checklist, add a Typing Tutor example README, and keep validation evidence passing.
 
 ## Inputs
 
@@ -13,35 +13,37 @@ Implement the v0.3 reference case-study slice by expanding `examples/typing-tuto
 - Eval plan: `.loop/03-eval-plan.md`
 - Relevant files:
   - `README.md`
+  - `docs/loop-engineering-framework.md`
   - `docs/roadmap.md`
   - `.loop/`
   - `examples/typing-tutor/`
-  - `scripts/validate-loop-kit.sh`
+  - `scripts/`
 
 ## Scope
 
 In scope:
 
-- Add typing-tutor product vision, external feedback digest, product spec, eval plan, PR evidence, developer review, and case-study docs.
-- Update the existing typing-tutor agent task to reference the new artifacts.
-- Link the case study from README.
-- Update roadmap language for v0.3.
+- Rewrite README for external reviewers.
+- Add `docs/repo-tour.md`.
+- Add `docs/share-checklist.md`.
+- Add `examples/typing-tutor/README.md`.
+- Add `.gitignore`.
 - Update `.loop/05-pr-evidence.md`, `.loop/06-developer-review.md`, and `.loop/08-decision-log.md`.
-- Run validation and file checks.
+- Run validation and prototype checks.
 
 Out of scope:
 
-- Implementing the typing tutor app.
-- Claiming real learner/adult feedback has been collected.
-- Adding package distribution.
-- Adding screenshots for a non-existent implementation.
+- Publishing package artifacts.
+- Creating a website.
+- Changing prototype behavior.
+- Claiming external adoption.
 
 ## Implementation Rules
 
-- Keep the case study concrete and honest about what is synthesized versus implemented.
-- Preserve the three-loop framework vocabulary.
-- Prefer plain Markdown/YAML.
-- Do not weaken validator rules to make the example pass; the validator checks this repo's `.loop`, not the example package.
+- Keep docs direct and reviewer-facing.
+- Preserve known caveats.
+- Do not weaken validator rules.
+- Keep prototype evidence intact.
 - Record evidence in `.loop/05-pr-evidence.md`.
 
 ## Commands To Run
@@ -49,20 +51,20 @@ Out of scope:
 | Purpose | Command |
 | --- | --- |
 | Validator pass | `./scripts/validate-loop-kit.sh .` |
+| Prototype scoring tests | `node examples/typing-tutor/prototype/scoring.test.js` |
 | Shell syntax | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh` |
 | Whitespace | `git diff --check` |
 | YAML parse | `ruby -e 'require "yaml"; YAML.load_file(".loop/00-loop-map.yaml"); YAML.load_file("templates/00-loop-map.yaml"); YAML.load_file("examples/typing-tutor/loop-map.yaml")'` |
-| Example file check | `find examples/typing-tutor -maxdepth 1 -type f | sort` |
-| README case-study link | `rg "examples/typing-tutor/case-study.md" README.md` |
+| Share docs path check | `test -f README.md docs/repo-tour.md docs/share-checklist.md examples/typing-tutor/README.md` |
 | Repo status | `git status --short --untracked-files=all` |
 
 ## Working Loop
 
-1. Inspect the current example.
-2. Add the missing loop artifacts.
-3. Tie the case study back to README and roadmap.
-4. Update this repo's `.loop` evidence.
-5. Run validation and file checks.
+1. Audit repo structure.
+2. Rewrite public entrypoints.
+3. Add reviewer and share docs.
+4. Update `.loop` evidence.
+5. Run validation and prototype checks.
 
 ## Completion Contract
 
@@ -71,5 +73,5 @@ Return:
 - Summary of changes.
 - Evidence for each acceptance criterion.
 - Checks run and results.
-- Known risks.
-- Questions for developer review.
+- Known caveats.
+- Current git status.

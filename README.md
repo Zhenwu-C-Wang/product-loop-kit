@@ -1,24 +1,44 @@
 # Product Loop Kit
 
-Runnable reference kit for turning user feedback into product vision, product specs, evals, AI coding-agent tasks, PR evidence, and human review loops.
+Product Loop Kit is a plain-file operating system for building products with AI coding agents.
 
-This repo contains the **Loop Engineering Framework for AI Agents**: a practical operating system for getting AI agents to build software in tight engineering loops while humans keep control of product direction.
+It turns product vision, user feedback, evals, agent tasks, PR evidence, and human review into a repeatable loop that can live inside any software repo.
 
-## The Framework
+## Why This Exists
 
-Loop engineering makes iteration explicit enough that an AI agent can work for longer stretches without constant human intervention, while still giving developers clear control points.
+AI coding agents are good at iterating on code when the work is bounded and verifiable. They are much weaker when product intent, user context, acceptance criteria, and review evidence live only in chat history.
 
-The framework has three nested loops:
+Product Loop Kit makes those loops explicit:
 
-| Loop | Cadence | Owner | Core Question | Output |
-| --- | --- | --- | --- | --- |
-| Agentic coding loop | Minutes | AI coding agent | Does the implementation satisfy the spec and evals? | Code, test results, screenshots, PR evidence |
-| Developer feedback loop | Tens of minutes to hours | Developer | Is the product moving toward the intended user experience and business bet? | Spec updates, priority calls, new evals, next agent task |
-| External feedback loop | Hours to weeks | Users, customers, market | Are we solving the right problem for the right people? | Product vision updates, validated learning, new bets |
+| Loop | Cadence | Owner | Question |
+| --- | --- | --- | --- |
+| Agentic coding loop | Minutes | AI coding agent | Does the implementation satisfy the spec and evals? |
+| Developer feedback loop | Tens of minutes to hours | Developer | Is the product moving toward the intended user outcome? |
+| External feedback loop | Hours to weeks | Users, customers, market | Are we solving the right problem for the right people? |
 
-Read the full framework: [docs/loop-engineering-framework.md](docs/loop-engineering-framework.md)
+The goal is not to automate humans out of product work. The goal is to preserve human context advantage while giving agents enough structure to execute independently.
 
-## Quick Start
+## Start Here
+
+If you are reviewing this repo:
+
+1. Read the framework: [docs/loop-engineering-framework.md](docs/loop-engineering-framework.md)
+2. Take the 10-minute tour: [docs/repo-tour.md](docs/repo-tour.md)
+3. Inspect the self-application artifacts: [.loop/](.loop)
+4. Open the reference case study: [examples/typing-tutor/README.md](examples/typing-tutor/README.md)
+5. Run validation:
+
+```bash
+./scripts/validate-loop-kit.sh .
+```
+
+Expected result for this repo:
+
+```text
+summary: 63 passed, 0 warning(s), 0 failed
+```
+
+## Use In Your Repo
 
 Initialize the loop kit inside any product repo:
 
@@ -26,7 +46,7 @@ Initialize the loop kit inside any product repo:
 ./scripts/init-loop-kit.sh "My Product" /path/to/product-repo
 ```
 
-This creates a `.loop/` directory with the core artifacts:
+This creates a `.loop/` directory with 9 artifacts:
 
 - `00-loop-map.yaml`
 - `01-product-vision.md`
@@ -38,12 +58,6 @@ This creates a `.loop/` directory with the core artifacts:
 - `07-external-feedback-digest.md`
 - `08-decision-log.md`
 
-For this repo itself:
-
-```bash
-./scripts/init-loop-kit.sh "Product Loop Kit" .
-```
-
 After filling the first product slice, validate that the loop artifacts are ready for an agent:
 
 ```bash
@@ -52,24 +66,54 @@ After filling the first product slice, validate that the loop artifacts are read
 
 A freshly initialized `.loop/` is expected to fail validation until the critical fields are filled.
 
-## How To Use It
+## What Is In This Repo
 
-1. Start with `01-product-vision.md`: state the user, the context advantage the human brings, and the current product bet.
-2. Turn the next slice of the vision into `02-product-spec.md`: small enough for an agent to implement and verify.
-3. Define checks in `03-eval-plan.md`: tests, manual review, browser checks, data-quality checks, or product acceptance criteria.
-4. Give the agent `04-agent-task.md`: include scope, constraints, commands to run, and the evidence it must return.
-5. Record implementation evidence in `05-pr-evidence.md`.
-6. Use `06-developer-review.md` to decide whether to accept, iterate, change the spec, or add evals.
-7. Feed real-world learning into `07-external-feedback-digest.md`, then update the vision and decision log.
+| Path | Purpose |
+| --- | --- |
+| [docs/loop-engineering-framework.md](docs/loop-engineering-framework.md) | Full Loop Engineering Framework for AI Agents |
+| [docs/repo-tour.md](docs/repo-tour.md) | Short reviewer walkthrough |
+| [docs/roadmap.md](docs/roadmap.md) | v0.x product roadmap |
+| [docs/share-checklist.md](docs/share-checklist.md) | Pre-share checklist and current caveats |
+| [.loop/](.loop) | Product Loop Kit managing itself with its own artifacts |
+| [templates/](templates) | Reusable `.loop/` artifact templates |
+| [scripts/init-loop-kit.sh](scripts/init-loop-kit.sh) | Initializes `.loop/` in a target repo |
+| [scripts/validate-loop-kit.sh](scripts/validate-loop-kit.sh) | Checks whether `.loop/` is agent-ready |
+| [examples/typing-tutor/](examples/typing-tutor) | End-to-end reference case study with runnable prototype |
 
-## Repository Map
+## Reference Case Study
 
-- [docs/loop-engineering-framework.md](docs/loop-engineering-framework.md): the operating model and loop contracts.
-- [docs/roadmap.md](docs/roadmap.md): the v0.x path from plain files to validation and case studies.
-- [templates/](templates): reusable artifacts for each loop.
-- [examples/typing-tutor/case-study.md](examples/typing-tutor/case-study.md): end-to-end reference case study for a small 0-to-1 product.
-- [scripts/init-loop-kit.sh](scripts/init-loop-kit.sh): copies templates into a target repo.
-- [scripts/validate-loop-kit.sh](scripts/validate-loop-kit.sh): checks whether `.loop/` is ready for an agent task.
+The Typing Tutor example shows the framework end to end:
+
+- External feedback digest
+- Product vision
+- Product spec
+- Eval plan
+- Agent task
+- Runnable static prototype
+- PR evidence
+- Developer review
+
+Open the prototype directly:
+
+[examples/typing-tutor/prototype/index.html](examples/typing-tutor/prototype/index.html)
+
+Run prototype scoring tests:
+
+```bash
+node examples/typing-tutor/prototype/scoring.test.js
+```
+
+## Current Status
+
+This repo is ready to share as a working reference kit:
+
+- Framework document exists.
+- Templates are reusable.
+- Initializer and validator scripts work.
+- The repo self-applies `.loop/`.
+- The Typing Tutor case study includes a runnable prototype, tests, and screenshots.
+
+Important caveat: external adoption has not been validated yet. The next loop should be a real user or real product repo applying the kit.
 
 ## License
 

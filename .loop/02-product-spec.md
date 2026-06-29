@@ -4,83 +4,84 @@ Created: 2026-06-29
 
 ## Slice
 
-- Name: v0.3 reference case study
+- Name: v0.5 share-ready repo organization
 - Owner: maintainer
 - Status: active
-- Related vision bet: Builders will understand and trust the framework faster when they can inspect a complete product loop, not only blank templates.
+- Related vision bet: Product Loop Kit is easier to evaluate when the repo has a clear public entry path, reviewer tour, share checklist, and example entrypoint.
 
 ## Problem
 
-Product Loop Kit now has framework docs, templates, initialization, and validation. It still needs a concrete example that shows how the artifacts work together across the external feedback loop, developer feedback loop, and agentic coding loop.
+The repo now contains a framework, templates, scripts, `.loop` self-application artifacts, a reference case study, and a runnable prototype. That is enough substance to share, but a first-time reviewer needs a clear path through the material.
 
-Without a reference case study, users can initialize the kit but may not know what "good enough to hand to an agent" looks like.
+Without repo-level organization, people may miss the validator, the case study, or the caveat that external adoption is still pending.
 
 ## User Story
 
-As a product-minded engineer, I want to inspect a complete example product loop, so that I can understand how to turn feedback into a vision, spec, eval plan, agent task, PR evidence, and developer review in my own repo.
+As someone receiving the repo link, I want to understand what this project is, where to start, how to validate it, and what evidence exists, so that I can evaluate it without a guided walkthrough.
 
 ## Requirements
 
 | ID | Requirement | Priority | Notes |
 | --- | --- | --- | --- |
-| R1 | Expand the typing-tutor example into an end-to-end case study. | Must | Use the existing example rather than inventing a new domain. |
-| R2 | Include artifacts for product vision, external feedback digest, product spec, eval plan, agent task, PR evidence, and developer review. | Must | Artifacts should demonstrate the three-loop flow. |
-| R3 | Keep the case study honest about evidence that is not yet real. | Must | Mark future implementation evidence as required, not completed. |
-| R4 | Link the case study from README. | Must | Users should find it from the repo map. |
-| R5 | Update roadmap to reflect the reference case-study milestone. | Must | Avoid claiming a real external product repo has been tested. |
-| R6 | Update `.loop/` artifacts and evidence for this v0.3 slice. | Must | The repo should keep using its own loop system. |
+| R1 | Rewrite README as a public-facing entrypoint. | Must | Include what it is, why it exists, start path, use path, repo map, case study, and status. |
+| R2 | Add a short repo tour for reviewers. | Must | `docs/repo-tour.md`. |
+| R3 | Add a share checklist with commands and caveats. | Must | `docs/share-checklist.md`. |
+| R4 | Add a Typing Tutor example README. | Must | `examples/typing-tutor/README.md`. |
+| R5 | Add a basic `.gitignore`. | Should | Avoid accidental local noise. |
+| R6 | Keep validator and prototype checks passing. | Must | Do not weaken existing evidence. |
 
 ## Acceptance Criteria
 
 | ID | Criterion | Verification Method |
 | --- | --- | --- |
-| A1 | `examples/typing-tutor/case-study.md` explains the full path from feedback to agent task and review. | Manual inspection. |
-| A2 | Typing Tutor example contains concrete loop artifacts for vision, feedback, spec, eval, task, evidence, and review. | File existence and content inspection. |
-| A3 | README links directly to the case study. | README inspection. |
-| A4 | Roadmap describes v0.3 as a reference case study without overclaiming external adoption. | Roadmap inspection. |
-| A5 | Product Loop Kit validator still passes on this repo. | `./scripts/validate-loop-kit.sh .`. |
+| A1 | README gives a clear external review path. | Manual inspection. |
+| A2 | Reviewer docs exist and link to working repo paths. | `test -f` and path inspection. |
+| A3 | Typing Tutor has its own README and still points to prototype evidence. | File inspection. |
+| A4 | Product Loop Kit validator still passes. | `./scripts/validate-loop-kit.sh .`. |
+| A5 | Prototype scoring tests still pass. | `node examples/typing-tutor/prototype/scoring.test.js`. |
 
 ## UX Notes
 
-- Entry point: README repo map links to `examples/typing-tutor/case-study.md`.
-- Main flow: Read case study, inspect artifacts, copy the artifact pattern into a real product repo.
-- Empty state: Not applicable; this is a filled example.
-- Error state: The case study should clearly distinguish planned evidence from completed implementation evidence.
+- Entry point: `README.md`.
+- Main flow: README -> repo tour -> framework -> `.loop` -> Typing Tutor case study -> validator.
+- Empty state: Not applicable.
+- Error state: Share checklist calls out known caveats instead of hiding them.
 - Loading state: Not applicable.
-- Accessibility: Plain Markdown tables and headings.
+- Accessibility: Plain Markdown and simple tables.
 - Mobile/responsive behavior: Not applicable.
 
 ## Data And State
 
-- Inputs: Existing typing-tutor loop map and agent task.
-- Outputs: Filled example artifacts and a readable case-study document.
-- State transitions: external signal -> product vision -> product spec -> eval plan -> agent task -> evidence contract -> developer review.
-- Persistence: Files live under `examples/typing-tutor/`.
-- Privacy/security considerations: Case study uses synthesized product context, not private learner data.
+- Inputs: Existing docs, templates, scripts, `.loop`, and Typing Tutor artifacts.
+- Outputs: Organized README, repo tour, share checklist, example README, and `.gitignore`.
+- State transitions: local working reference -> share-ready repository package.
+- Persistence: Files are committed with the repo.
+- Privacy/security considerations: `.gitignore` excludes `.env` files; share checklist notes external feedback caveats.
 
 ## Instrumentation
 
 | Event/Metric | Trigger | Purpose |
 | --- | --- | --- |
-| Case study inspection | User reads example | Helps users understand artifact quality. |
-| Template copy/adaptation | User mirrors case-study structure | Indicates reference example is actionable. |
-| Validation pass | Repo validator succeeds | Confirms self-application artifacts remain complete. |
+| Reviewer tour completion | Reviewer follows `docs/repo-tour.md` | Tests whether repo can be understood asynchronously. |
+| Validator pass | `validate-loop-kit.sh` exits 0 | Confirms self-application artifacts remain complete. |
+| Prototype test pass | Node scoring tests pass | Confirms case-study implementation evidence remains valid. |
 
 ## Dependencies
 
-- Existing Product Loop Kit templates and validator.
-- No app implementation required for this slice.
+- Existing shell scripts.
+- Node for prototype scoring tests.
+- Ruby is optional for YAML parse checks.
 
 ## Non-Goals
 
-- Build the typing tutor app.
-- Claim real external learner feedback has been collected.
-- Add a hosted tutorial site.
-- Add package distribution.
+- Packaging or publishing.
+- Changing validator behavior.
+- Adding more app features.
+- Claiming external adoption.
 
 ## Open Questions
 
 | Question | Owner | Needed By |
 | --- | --- | --- |
-| Should v0.4 use an actual external repo rather than a reference example? | Maintainer | Before next roadmap update |
-| Should case studies include screenshots once a real app exists? | Maintainer | After first implementation case |
+| Should the repo include a `CHANGELOG.md` before public release? | Maintainer | Before tagging |
+| Should screenshots be optimized before pushing? | Maintainer | Before public share |

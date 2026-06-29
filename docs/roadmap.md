@@ -49,7 +49,22 @@ Exit criteria:
 - At least one repeated failure mode becomes an eval.
 - External feedback changes either the product vision or next spec.
 
-## v0.4 Distribution
+## v0.4 Real Usage Evidence
+
+Goal: Turn reference evidence into real usage evidence.
+
+- Run the typing-tutor prototype with one learner/adult pair.
+- Apply Product Loop Kit to at least one real product repo.
+- Capture real validation failures, confusion points, and template friction.
+- Update templates or validator rules from observed behavior.
+
+Exit criteria:
+
+- One real product loop completes end to end.
+- At least one external observation changes a spec, eval, or template.
+- The next distribution decision is based on adoption evidence.
+
+## v0.5 Distribution
 
 Goal: Make adoption easier after the workflow is validated.
 

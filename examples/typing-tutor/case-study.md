@@ -44,6 +44,7 @@ Artifacts:
 
 - `agent-task.md`
 - `pr-evidence.md`
+- `prototype/`
 
 The agent task is bounded by four acceptance criteria:
 
@@ -54,6 +55,14 @@ The agent task is bounded by four acceptance criteria:
 | A3 | Scoring handles empty input, exact match, partial match, and extra characters. | Unit tests. |
 | A4 | Main flow fits desktop and tablet widths without text overlap. | Screenshots or visual inspection. |
 
+Implementation evidence now exists:
+
+- Static prototype: `prototype/index.html`
+- Scoring logic: `prototype/scoring.js`
+- Scoring tests: `prototype/scoring.test.js`
+- Desktop screenshot: `prototype/screenshots/desktop-result.png`
+- Tablet screenshot: `prototype/screenshots/tablet-result.png`
+
 ## What This Demonstrates
 
 - The external loop changes the product slice before coding starts.
@@ -61,6 +70,7 @@ The agent task is bounded by four acceptance criteria:
 - Repeated or likely failure modes become evals.
 - The agent receives a task that includes scope, commands, acceptance criteria, and evidence requirements.
 - Developer review is about product behavior, not just code diff review.
+- A reference case study becomes stronger when PR evidence contains real checks and screenshots.
 
 ## Next Learning
 

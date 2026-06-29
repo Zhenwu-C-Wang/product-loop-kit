@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Typing Tutor Prototype</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell" aria-labelledby="app-title">
+      <header class="topbar">
+        <div>
+          <h1 id="app-title">Typing Tutor</h1>
+          <p class="status-line" id="status-line">Easy mode ready. Choose a prompt and start typing.</p>
+        </div>
+
+        <section class="difficulty-panel" aria-labelledby="difficulty-title">
+          <h2 id="difficulty-title">Adult difficulty</h2>
+          <div class="segmented-control" role="group" aria-label="Difficulty">
+            <button class="difficulty-button is-active" type="button" data-difficulty="easy">Easy</button>
+            <button class="difficulty-button" type="button" data-difficulty="medium">Medium</button>
+            <button class="difficulty-button" type="button" data-difficulty="hard">Hard</button>
+          </div>
+        </section>
+      </header>
+
+      <section class="workspace" aria-label="Typing practice workspace">
+        <section class="practice-panel" aria-labelledby="prompt-title">
+          <div class="panel-heading">
+            <h2 id="prompt-title">Type this prompt</h2>
+            <span class="prompt-meta" id="prompt-meta">3 words</span>
+          </div>
+
+          <p class="prompt-text" id="prompt-text">cat sat softly</p>
+
+          <label class="input-label" for="typing-input">Your typing</label>
+          <textarea
+            id="typing-input"
+            class="typing-input"
+            rows="5"
+            spellcheck="false"
+            autocomplete="off"
+            placeholder="Start typing here..."
+          ></textarea>
+
+          <div class="action-row">
+            <button class="primary-action" type="button" id="check-button">Check</button>
+            <button class="secondary-action" type="button" id="new-prompt-button">New prompt</button>
+          </div>
+        </section>
+
+        <aside class="result-panel" aria-labelledby="result-title" aria-live="polite">
+          <div class="panel-heading">
+            <h2 id="result-title">Result</h2>
+            <span class="result-state" id="result-state">Waiting</span>
+          </div>
+
+          <div class="score-grid">
+            <div class="score-block">
+              <span class="score-label">Accuracy</span>
+              <strong id="accuracy-value">--%</strong>
+            </div>
+            <div class="score-block">
+              <span class="score-label">WPM</span>
+              <strong id="wpm-value">--</strong>
+            </div>
+          </div>
+
+          <p class="feedback-message" id="feedback-message">
+            Finish the prompt, then check your result.
+          </p>
+
+          <dl class="detail-list">
+            <div>
+              <dt>Correct letters</dt>
+              <dd id="correct-value">--</dd>
+            </div>
+            <div>
+              <dt>Typed letters</dt>
+              <dd id="typed-value">--</dd>
+            </div>
+            <div>
+              <dt>Time</dt>
+              <dd id="time-value">0s</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+    </main>
+
+    <script src="./scoring.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
