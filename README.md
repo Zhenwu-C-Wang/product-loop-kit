@@ -26,6 +26,16 @@ Product Loop Kit makes those loops explicit:
 
 The goal is not to automate humans out of product work. The goal is to preserve human context advantage while giving agents enough structure to execute independently.
 
+## Product Layer, Not Agent Ops
+
+Product Loop Kit is the product artifact layer for agentic development.
+
+It complements agent loop automation toolkits that focus on scheduling, worktrees, sub-agents, connectors, costs, and unattended operation. This repo focuses on the upstream question those systems still need answered:
+
+> What product bet, user outcome, acceptance criteria, evidence, and human review should the agent loop be optimizing for?
+
+Use Product Loop Kit when the risk is product ambiguity, context loss, weak acceptance criteria, or review evidence that only exists in chat.
+
 ## Visual Overview
 
 ```mermaid
@@ -67,9 +77,10 @@ If you are reviewing this repo:
 
 1. Read the framework: [docs/loop-engineering-framework.md](docs/loop-engineering-framework.md)
 2. Take the 10-minute tour: [docs/repo-tour.md](docs/repo-tour.md)
-3. Inspect the self-application artifacts: [.loop/](.loop)
-4. Open the reference case study: [examples/typing-tutor/README.md](examples/typing-tutor/README.md)
-5. Run validation:
+3. Try the first-loop guide: [docs/first-loop.md](docs/first-loop.md)
+4. Inspect the self-application artifacts: [.loop/](.loop)
+5. Open the reference case study: [examples/typing-tutor/README.md](examples/typing-tutor/README.md)
+6. Run validation:
 
 ```bash
 ./scripts/validate-loop-kit.sh .
@@ -79,6 +90,18 @@ Expected result for this repo:
 
 ```text
 summary: 63 passed, 0 warning(s), 0 failed
+```
+
+Check product-loop maturity:
+
+```bash
+./scripts/score-loop-kit.sh .
+```
+
+Expected result for this repo:
+
+```text
+Product Loop Readiness: 100/100 (P4 external-learning-ready)
 ```
 
 ## Use In Your Repo
@@ -101,6 +124,15 @@ This creates a `.loop/` directory with 9 artifacts:
 - `07-external-feedback-digest.md`
 - `08-decision-log.md`
 
+For the first hour, fill only the core handoff path:
+
+1. `01-product-vision.md`
+2. `02-product-spec.md`
+3. `03-eval-plan.md`
+4. `04-agent-task.md`
+
+Use [docs/first-loop.md](docs/first-loop.md) for the detailed sequence.
+
 After filling the first product slice, validate that the loop artifacts are ready for an agent:
 
 ```bash
@@ -109,18 +141,37 @@ After filling the first product slice, validate that the loop artifacts are read
 
 A freshly initialized `.loop/` is expected to fail validation until the critical fields are filled.
 
+To see where the setup is immature before it fully passes validation, run:
+
+```bash
+./scripts/score-loop-kit.sh /path/to/product-repo
+```
+
+The score is intentionally product-centered:
+
+| Level | Meaning |
+| --- | --- |
+| P0 not-ready | Missing or unusable loop artifacts |
+| P1 initialized | `.loop/` exists but product context is incomplete |
+| P2 agent-ready | Spec, evals, and task can guide implementation |
+| P3 evidence-ready | Implementation evidence and developer review are recorded |
+| P4 external-learning-ready | The loop can feed real user or repo feedback back into product direction |
+
 ## What Is In This Repo
 
 | Path | Purpose |
 | --- | --- |
 | [docs/loop-engineering-framework.md](docs/loop-engineering-framework.md) | Full Loop Engineering Framework for AI Agents |
 | [docs/repo-tour.md](docs/repo-tour.md) | Short reviewer walkthrough |
+| [docs/first-loop.md](docs/first-loop.md) | Minimal first-hour path from initialized templates to agent-ready handoff |
+| [docs/external-adoption-loop.md](docs/external-adoption-loop.md) | Plan for testing the kit in a real product repo with a real builder |
 | [docs/roadmap.md](docs/roadmap.md) | v0.x product roadmap |
 | [docs/share-checklist.md](docs/share-checklist.md) | Pre-share checklist and current caveats |
 | [.loop/](.loop) | Product Loop Kit managing itself with its own artifacts |
 | [templates/](templates) | Reusable `.loop/` artifact templates |
 | [scripts/init-loop-kit.sh](scripts/init-loop-kit.sh) | Initializes `.loop/` in a target repo |
 | [scripts/validate-loop-kit.sh](scripts/validate-loop-kit.sh) | Checks whether `.loop/` is agent-ready |
+| [scripts/score-loop-kit.sh](scripts/score-loop-kit.sh) | Scores product-loop maturity from P0 to P4 |
 | [examples/typing-tutor/](examples/typing-tutor) | End-to-end reference case study with runnable prototype |
 
 ## Reference Case Study
@@ -160,7 +211,9 @@ This repo is ready to share as a working reference kit:
 
 - Framework document exists.
 - Templates are reusable.
-- Initializer and validator scripts work.
+- Initializer, validator, readiness score, and score regression scripts work.
+- First-loop and external adoption guides exist.
+- Local regression checks are defined for core scripts and scoring behavior.
 - The repo self-applies `.loop/`.
 - The Typing Tutor case study includes a runnable prototype, tests, and screenshots.
 

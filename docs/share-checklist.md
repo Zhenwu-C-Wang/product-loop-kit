@@ -6,11 +6,15 @@ Use this before sending the repo to someone.
 
 - [ ] README explains the project in the first screen.
 - [ ] `docs/repo-tour.md` gives reviewers a short path.
+- [ ] `docs/first-loop.md` gives first-time users a small path to P2.
+- [ ] `docs/external-adoption-loop.md` defines the next real-use feedback loop.
 - [ ] `docs/loop-engineering-framework.md` explains the three loops.
 - [ ] `.loop/` validates successfully.
 - [ ] `templates/` contains all 9 reusable artifacts.
 - [ ] `scripts/init-loop-kit.sh` is executable.
 - [ ] `scripts/validate-loop-kit.sh` is executable.
+- [ ] `scripts/score-loop-kit.sh` is executable.
+- [ ] `scripts/test-score-loop-kit.sh` is executable.
 - [ ] Typing Tutor case study has a README.
 - [ ] Typing Tutor prototype opens directly.
 - [ ] Typing Tutor scoring tests pass.
@@ -21,8 +25,11 @@ Run from repo root:
 
 ```bash
 ./scripts/validate-loop-kit.sh .
+./scripts/score-loop-kit.sh .
+./scripts/test-score-loop-kit.sh
 node examples/typing-tutor/prototype/scoring.test.js
-bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh
+bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh scripts/score-loop-kit.sh scripts/test-score-loop-kit.sh
+for path in README.md docs/repo-tour.md docs/first-loop.md docs/external-adoption-loop.md docs/roadmap.md docs/share-checklist.md scripts/score-loop-kit.sh scripts/test-score-loop-kit.sh tests/fixtures/score/expected-levels.tsv; do test -f "$path" || exit 1; done
 git diff --check
 ```
 
@@ -34,12 +41,13 @@ ruby -e 'require "yaml"; YAML.load_file(".loop/00-loop-map.yaml"); YAML.load_fil
 
 ## Suggested Message When Sharing
 
-Product Loop Kit is a plain-file framework for running product development loops with AI coding agents. It includes a framework doc, reusable `.loop` templates, initializer and validator scripts, self-application artifacts, and a Typing Tutor case study with a runnable prototype and evidence.
+Product Loop Kit is a plain-file product artifact layer for running product development loops with AI coding agents. It includes a framework doc, reusable `.loop` templates, initializer, validator, product-loop readiness score, score regression tests, self-application artifacts, and a Typing Tutor case study with a runnable prototype and evidence.
 
 Start here:
 
 - `README.md`
 - `docs/repo-tour.md`
+- `docs/first-loop.md`
 - `examples/typing-tutor/README.md`
 
 ## Known Caveats

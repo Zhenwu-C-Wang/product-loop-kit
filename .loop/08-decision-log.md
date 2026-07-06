@@ -14,6 +14,8 @@ Use this log for decisions that change product direction, engineering constraint
 | 2026-06-29 | Use typing-tutor as the first reference case study. | v0.3 spec | Wait for a real external repo before adding examples | External feedback |
 | 2026-06-29 | Accept the runnable Typing Tutor prototype as local implementation evidence. | Developer review | Keep case study as documentation only | External feedback |
 | 2026-06-29 | Organize repo for asynchronous sharing before adding more features. | User request | Add more framework content first | External feedback |
+| 2026-07-06 | Position Product Loop Kit as the product artifact layer and add readiness scoring before packaging. | Developer comparison | Copy agent-ops tooling scope, package immediately, keep validator only | External feedback |
+| 2026-07-06 | Add first-loop guidance, external adoption protocol, score regression tests, and local share checks before packaging. | Developer review | Package immediately, add more examples, skip regression checks | External feedback |
 
 ## Entry Template
 

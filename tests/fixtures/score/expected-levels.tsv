@@ -1,0 +1,6 @@
+# scenario	expected readiness line	expected category line
+p0_missing_loop	Product Loop Readiness: 0/100 (P0 not-ready)	- Structure: 0/20
+p1_initialized	Product Loop Readiness: 41/100 (P1 initialized)	- Agent handoff: 7/25
+p2_agent_ready	Product Loop Readiness: 73/100 (P2 agent-ready)	- Agent handoff: 25/25
+p3_evidence_ready	Product Loop Readiness: 87/100 (P3 evidence-ready)	- Evidence and review: 17/25
+p4_current_repo	Product Loop Readiness: 100/100 (P4 external-learning-ready)	- Artifact hygiene: 10/10

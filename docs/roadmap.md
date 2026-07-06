@@ -64,7 +64,41 @@ Exit criteria:
 - At least one external observation changes a spec, eval, or template.
 - The next distribution decision is based on adoption evidence.
 
-## v0.5 Distribution
+## v0.5 Product-Layer Positioning And Readiness Score
+
+Goal: Make the kit's product-layer role explicit and give users a lightweight maturity signal before packaging.
+
+- Position Product Loop Kit as the product artifact layer for agentic development, not a replacement for agent loop automation tooling.
+- Add `scripts/score-loop-kit.sh` to report product-loop maturity from P0 to P4.
+- Keep `scripts/validate-loop-kit.sh` as the strict pass/fail gate.
+- Document when to use scoring versus validation.
+- Use the score to identify the next missing product-loop artifact without weakening validation.
+
+Exit criteria:
+
+- README explains the product-layer boundary.
+- Scoring passes on this repo with P4 external-learning-ready.
+- Scoring gives useful next actions for incomplete `.loop/` setups.
+- Validation still passes unchanged on this repo.
+
+## v0.6 External Adoption Kit And Score Tests
+
+Goal: Make the first real adoption loop easier to run and keep readiness scoring stable while the templates evolve.
+
+- Add a first-loop guide that narrows the first hour to vision, spec, eval plan, and agent task.
+- Add an external adoption loop guide for testing the kit in a real product repo with a real builder.
+- Add regression tests for `scripts/score-loop-kit.sh` across P0, P1, P2, P3, and P4 scenarios.
+- Keep a local check suite for validator, score, score tests, prototype tests, shell syntax, YAML parse, and whitespace.
+- Feed adoption findings back into templates, score next actions, and validator rules.
+
+Exit criteria:
+
+- A new user can follow `docs/first-loop.md` to reach P2 without a live walkthrough.
+- One adoption session can be run from `docs/external-adoption-loop.md`.
+- Score regression tests protect level thresholds and category output.
+- Local checks catch drift in core scripts, docs, `.loop`, and the Typing Tutor case study.
+
+## v0.7 Distribution
 
 Goal: Make adoption easier after the workflow is validated.
 
@@ -72,6 +106,7 @@ Goal: Make adoption easier after the workflow is validated.
 - Consider a GitHub template repo.
 - Consider agent prompt packs for common coding agents.
 - Consider optional issue/PR templates.
+- Keep distribution focused on the `.loop/` product artifact model rather than agent orchestration.
 
 Exit criteria:
 
