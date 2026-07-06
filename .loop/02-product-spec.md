@@ -1,87 +1,89 @@
 # Product Loop Kit Product Spec
 
-Created: 2026-06-29
+Created: 2026-07-06
 
 ## Slice
 
-- Name: v0.5 share-ready repo organization
+- Name: v0.6 external adoption kit and score tests
 - Owner: maintainer
 - Status: active
-- Related vision bet: Product Loop Kit is easier to evaluate when the repo has a clear public entry path, reviewer tour, share checklist, and example entrypoint.
+- Related vision bet: Product Loop Kit should prove that real builders can reach an agent-ready product loop before investing in packaging or broader distribution.
 
 ## Problem
 
-The repo now contains a framework, templates, scripts, `.loop` self-application artifacts, a reference case study, and a runnable prototype. That is enough substance to share, but a first-time reviewer needs a clear path through the material.
+Product Loop Kit now has clear positioning and a readiness score, but the first external adoption loop still needs a smaller path. A new builder should not have to understand all 9 artifacts before using the kit. They need a first-hour guide that narrows setup to the core product handoff.
 
-Without repo-level organization, people may miss the validator, the case study, or the caveat that external adoption is still pending.
+The new score script also needs regression coverage. Without fixtures, future template or validator changes could silently shift P0-P4 thresholds or break output that users and CI rely on.
 
 ## User Story
 
-As someone receiving the repo link, I want to understand what this project is, where to start, how to validate it, and what evidence exists, so that I can evaluate it without a guided walkthrough.
+As a product-minded engineer trying Product Loop Kit in a real repo, I want a short first-loop guide, an adoption test plan, stable readiness scoring, and CI-backed checks, so that I can try the kit without a live walkthrough and report useful friction.
 
 ## Requirements
 
 | ID | Requirement | Priority | Notes |
 | --- | --- | --- | --- |
-| R1 | Rewrite README as a public-facing entrypoint. | Must | Include what it is, why it exists, start path, use path, repo map, case study, and status. |
-| R2 | Add a short repo tour for reviewers. | Must | `docs/repo-tour.md`. |
-| R3 | Add a share checklist with commands and caveats. | Must | `docs/share-checklist.md`. |
-| R4 | Add a Typing Tutor example README. | Must | `examples/typing-tutor/README.md`. |
-| R5 | Add a basic `.gitignore`. | Should | Avoid accidental local noise. |
-| R6 | Keep validator and prototype checks passing. | Must | Do not weaken existing evidence. |
+| R1 | Add a first-loop guide. | Must | Narrow the first hour to vision, spec, eval plan, and agent task. |
+| R2 | Add an external adoption loop guide. | Must | Define who to recruit, what to ask, what to observe, and what evidence to bring back. |
+| R3 | Add score regression tests. | Must | Cover P0, P1, P2, P3, and P4 readiness scenarios. |
+| R4 | Add lightweight CI. | Must | Run validator, score, score tests, prototype tests, shell syntax, YAML parse, path checks, and whitespace. |
+| R5 | Update public docs to expose the new adoption path. | Must | README, repo tour, roadmap, and share checklist. |
+| R6 | Keep existing validation and prototype evidence passing. | Must | Do not weaken validator rules or example tests. |
 
 ## Acceptance Criteria
 
 | ID | Criterion | Verification Method |
 | --- | --- | --- |
-| A1 | README gives a clear external review path. | Manual inspection. |
-| A2 | Reviewer docs exist and link to working repo paths. | `test -f` and path inspection. |
-| A3 | Typing Tutor has its own README and still points to prototype evidence. | File inspection. |
-| A4 | Product Loop Kit validator still passes. | `./scripts/validate-loop-kit.sh .`. |
-| A5 | Prototype scoring tests still pass. | `node examples/typing-tutor/prototype/scoring.test.js`. |
+| A1 | `docs/first-loop.md` gives a first-hour path to P2 agent-ready. | Manual inspection and path check. |
+| A2 | `docs/external-adoption-loop.md` defines a usable real-repo adoption test. | Manual inspection and path check. |
+| A3 | `scripts/test-score-loop-kit.sh` passes and covers P0, P1, P2, P3, and P4 scenarios. | Run score test script. |
+| A4 | `.github/workflows/ci.yml` runs the core local checks. | File inspection and shell command parity. |
+| A5 | Validator still passes unchanged. | `./scripts/validate-loop-kit.sh .`. |
+| A6 | Score, prototype, shell syntax, YAML, path, and whitespace checks pass. | Run documented commands. |
 
 ## UX Notes
 
 - Entry point: `README.md`.
-- Main flow: README -> repo tour -> framework -> `.loop` -> Typing Tutor case study -> validator.
-- Empty state: Not applicable.
-- Error state: Share checklist calls out known caveats instead of hiding them.
-- Loading state: Not applicable.
-- Accessibility: Plain Markdown and simple tables.
+- First-use flow: README -> `docs/first-loop.md` -> score -> agent task -> evidence -> review.
+- Adoption flow: `docs/external-adoption-loop.md` -> external observations -> feedback digest -> decision log.
+- Empty state: fresh templates should score P1 and point users toward next actions.
+- Error state: CI and local scripts should fail with actionable command output.
+- Accessibility: plain Markdown, shell scripts, and GitHub Actions.
 - Mobile/responsive behavior: Not applicable.
 
 ## Data And State
 
-- Inputs: Existing docs, templates, scripts, `.loop`, and Typing Tutor artifacts.
-- Outputs: Organized README, repo tour, share checklist, example README, and `.gitignore`.
-- State transitions: local working reference -> share-ready repository package.
-- Persistence: Files are committed with the repo.
-- Privacy/security considerations: `.gitignore` excludes `.env` files; share checklist notes external feedback caveats.
+- Inputs: existing docs, templates, scripts, `.loop`, Typing Tutor example, and readiness score.
+- Outputs: first-loop guide, external adoption guide, score fixtures, score test script, CI workflow, updated self-application evidence.
+- State transitions: differentiated product-loop kit -> adoption-ready kit with regression checks.
+- Persistence: files committed with the repo.
+- Privacy/security considerations: adoption guide instructs users to avoid copying private product details into this public repo.
 
 ## Instrumentation
 
 | Event/Metric | Trigger | Purpose |
 | --- | --- | --- |
-| Reviewer tour completion | Reviewer follows `docs/repo-tour.md` | Tests whether repo can be understood asynchronously. |
-| Validator pass | `validate-loop-kit.sh` exits 0 | Confirms self-application artifacts remain complete. |
-| Prototype test pass | Node scoring tests pass | Confirms case-study implementation evidence remains valid. |
+| Score regression test pass | `scripts/test-score-loop-kit.sh` exits 0 | Protects P0-P4 scoring behavior. |
+| CI pass | GitHub Actions workflow runs | Catches drift before merge. |
+| External adoption outcome | Adoption session completes | Tests whether real builders can use the kit without a live walkthrough. |
 
 ## Dependencies
 
-- Existing shell scripts.
+- Existing shell environment.
 - Node for prototype scoring tests.
-- Ruby is optional for YAML parse checks.
+- Ruby is optional locally but available in CI for YAML parse checks.
+- GitHub Actions for hosted CI.
 
 ## Non-Goals
 
-- Packaging or publishing.
-- Changing validator behavior.
-- Adding more app features.
-- Claiming external adoption.
+- Publishing npm packages.
+- Creating a hosted dashboard.
+- Adding agent orchestration, scheduling, MCP, worktree, or sub-agent runtime support.
+- Claiming external adoption before the adoption loop runs.
 
 ## Open Questions
 
 | Question | Owner | Needed By |
 | --- | --- | --- |
-| Should the repo include a `CHANGELOG.md` before public release? | Maintainer | Before tagging |
-| Should screenshots be optimized before pushing? | Maintainer | Before public share |
+| Should the first-loop guide be copied into initialized repos as `.loop/README.md`? | Maintainer | After one adoption session |
+| Should CI become required before tagging a public release? | Maintainer | Before v0.7 distribution |

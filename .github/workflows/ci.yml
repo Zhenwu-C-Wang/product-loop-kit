@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    name: Validate loop kit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Validate .loop artifacts
+        run: ./scripts/validate-loop-kit.sh .
+
+      - name: Score product-loop readiness
+        run: ./scripts/score-loop-kit.sh .
+
+      - name: Run score regression tests
+        run: ./scripts/test-score-loop-kit.sh
+
+      - name: Run Typing Tutor scoring tests
+        run: node examples/typing-tutor/prototype/scoring.test.js
+
+      - name: Check shell syntax
+        run: bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh scripts/score-loop-kit.sh scripts/test-score-loop-kit.sh
+
+      - name: Parse loop YAML files
+        run: ruby -e 'require "yaml"; YAML.load_file(".loop/00-loop-map.yaml"); YAML.load_file("templates/00-loop-map.yaml"); YAML.load_file("examples/typing-tutor/loop-map.yaml")'
+
+      - name: Check expected entrypoints
+        run: |
+          for path in \
+            README.md \
+            docs/repo-tour.md \
+            docs/first-loop.md \
+            docs/external-adoption-loop.md \
+            docs/roadmap.md \
+            docs/share-checklist.md \
+            scripts/score-loop-kit.sh \
+            scripts/test-score-loop-kit.sh \
+            tests/fixtures/score/expected-levels.tsv; do
+            test -f "$path" || exit 1
+          done
+
+      - name: Check whitespace
+        run: |
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            git diff --check HEAD^ HEAD
+          else
+            git diff --check
+          fi

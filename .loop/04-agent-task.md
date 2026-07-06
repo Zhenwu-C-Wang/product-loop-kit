@@ -1,10 +1,10 @@
 # Product Loop Kit Agent Task
 
-Created: 2026-06-29
+Created: 2026-07-06
 
 ## Goal
 
-Organize Product Loop Kit so it can be sent directly to reviewers: tighten the README, add a repo tour, add a share checklist, add a Typing Tutor example README, and keep validation evidence passing.
+Advance Product Loop Kit from product-layer positioning to an adoption-ready reference: add the first-loop guide, external adoption loop guide, score regression tests, lightweight CI, and updated self-application evidence.
 
 ## Inputs
 
@@ -13,37 +13,43 @@ Organize Product Loop Kit so it can be sent directly to reviewers: tighten the R
 - Eval plan: `.loop/03-eval-plan.md`
 - Relevant files:
   - `README.md`
-  - `docs/loop-engineering-framework.md`
+  - `docs/repo-tour.md`
   - `docs/roadmap.md`
+  - `docs/share-checklist.md`
+  - `scripts/init-loop-kit.sh`
+  - `scripts/validate-loop-kit.sh`
+  - `scripts/score-loop-kit.sh`
   - `.loop/`
   - `examples/typing-tutor/`
-  - `scripts/`
 
 ## Scope
 
 In scope:
 
-- Rewrite README for external reviewers.
-- Add `docs/repo-tour.md`.
-- Add `docs/share-checklist.md`.
-- Add `examples/typing-tutor/README.md`.
-- Add `.gitignore`.
+- Add `docs/first-loop.md`.
+- Add `docs/external-adoption-loop.md`.
+- Add `scripts/test-score-loop-kit.sh`.
+- Add `tests/fixtures/score/expected-levels.tsv`.
+- Add `.github/workflows/ci.yml`.
+- Update README, repo tour, roadmap, and share checklist.
 - Update `.loop/05-pr-evidence.md`, `.loop/06-developer-review.md`, and `.loop/08-decision-log.md`.
-- Run validation and prototype checks.
+- Run validation, scoring, score tests, prototype tests, shell, whitespace, YAML, and path checks.
 
 Out of scope:
 
 - Publishing package artifacts.
 - Creating a website.
+- Adding agent scheduling, worktrees, MCP, or sub-agent orchestration.
 - Changing prototype behavior.
 - Claiming external adoption.
 
 ## Implementation Rules
 
-- Keep docs direct and reviewer-facing.
-- Preserve known caveats.
+- Keep the first-loop path small and practical.
+- Keep adoption guidance observation-driven.
+- Keep score tests dependency-light and deterministic.
+- Keep CI focused on local checks only.
 - Do not weaken validator rules.
-- Keep prototype evidence intact.
 - Record evidence in `.loop/05-pr-evidence.md`.
 
 ## Commands To Run
@@ -51,20 +57,23 @@ Out of scope:
 | Purpose | Command |
 | --- | --- |
 | Validator pass | `./scripts/validate-loop-kit.sh .` |
+| Product-loop readiness score | `./scripts/score-loop-kit.sh .` |
+| Score regression tests | `./scripts/test-score-loop-kit.sh` |
 | Prototype scoring tests | `node examples/typing-tutor/prototype/scoring.test.js` |
-| Shell syntax | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh` |
-| Whitespace | `git diff --check` |
+| Shell syntax | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh scripts/score-loop-kit.sh scripts/test-score-loop-kit.sh` |
 | YAML parse | `ruby -e 'require "yaml"; YAML.load_file(".loop/00-loop-map.yaml"); YAML.load_file("templates/00-loop-map.yaml"); YAML.load_file("examples/typing-tutor/loop-map.yaml")'` |
-| Share docs path check | `test -f README.md docs/repo-tour.md docs/share-checklist.md examples/typing-tutor/README.md` |
+| Docs path check | `for path in README.md docs/repo-tour.md docs/first-loop.md docs/external-adoption-loop.md docs/roadmap.md docs/share-checklist.md scripts/score-loop-kit.sh scripts/test-score-loop-kit.sh tests/fixtures/score/expected-levels.tsv .github/workflows/ci.yml; do test -f "$path" || exit 1; done` |
+| Whitespace | `git diff --check` |
 | Repo status | `git status --short --untracked-files=all` |
 
 ## Working Loop
 
-1. Audit repo structure.
-2. Rewrite public entrypoints.
-3. Add reviewer and share docs.
-4. Update `.loop` evidence.
-5. Run validation and prototype checks.
+1. Add first-use and adoption docs.
+2. Add score fixtures and regression tests.
+3. Add lightweight CI.
+4. Update public docs.
+5. Update `.loop` evidence.
+6. Run full validation and regression checks.
 
 ## Completion Contract
 
