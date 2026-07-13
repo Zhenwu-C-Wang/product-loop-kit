@@ -20,7 +20,7 @@ This roadmap moves Product Loop Kit from a useful artifact system to a proven pr
 | v0.4 Real usage evidence | Not completed | The original milestone is carried into v0.7 with stronger human-token measures. |
 | v0.5 Product-layer positioning and readiness score | Complete | P0-P4 score and positioning are documented. |
 | v0.6 External adoption kit and score tests | Complete | First-loop guide, adoption protocol, and score fixtures exist. |
-| v0.7 External adoption and human-token proof | Next | Requires a real builder using a real product repo. |
+| v0.7 External adoption and human-token proof | In progress | One assisted real-work pilot is complete; a cold real-builder loop is still required. |
 
 ## Completed Foundation: v0.1-v0.3
 

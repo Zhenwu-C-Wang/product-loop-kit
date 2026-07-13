@@ -18,6 +18,7 @@ Created: 2026-07-13
 | Browser prototype QA | 2 viewports | Medium | Desktop and tablet checks prove local implementation behavior, not real learner usefulness. |
 | Score regression fixtures | 5 scenarios | Medium | P0-P4 scoring behavior is covered with generated temporary repos and the current repo. |
 | User-provided agentic coding loop guidance | 1 essay | Medium | Emphasizes early implementation, iterative specs, cheap agent tokens, expensive human context, and durable product memory. |
+| Anonymized assisted real-work pilot | 1 slice | Medium | Applied the kit to a non-Git, document-heavy research workspace and built an offline workflow prototype; the agent filled the artifacts, so this is not cold adoption. |
 | User interviews | 0 | Pending | Needed before claiming external adoption. |
 | Real product repo application | 0 | Pending | Needed before distribution choices. |
 
@@ -35,6 +36,9 @@ Keep observations separate from interpretations.
 | Readiness scoring gives incomplete setups a maturity signal before strict validation passes. | v0.5 scoring | 1 | Medium |
 | First-loop and adoption guides make the next external test easier to run. | v0.6 docs | 2 | Medium |
 | The existing roadmap measures adoption readiness but not whether a builder must repeat important context in the next agent iteration. | Roadmap and adoption protocol review | 1 | High |
+| An assisted real-work workspace reached P2 at 71/100 before implementation and P4 at 100/100 after evidence and review were recorded. | Readiness score before and after the pilot | 1 | High |
+| The pilot produced browser-tested evidence in about 35 minutes and visual comparison found two implementation defects before review. | Timestamped pilot evidence and screenshots | 1 slice | High |
+| The pilot had no independent builder and no second human-correction task. | Pilot setup | 1 | High |
 
 ## Interpretations
 
@@ -45,6 +49,7 @@ Keep observations separate from interpretations.
 | A real repo or real learner session should come before packaging. | Current evidence is still local and documentation-focused. | High | Packaging might reduce enough setup friction to be worth doing earlier. |
 | Score tests reduce local regression risk but do not validate adoption. | P0-P4 fixtures passed, but no external builder has reacted to the score. | High | Score stability may itself make adoption easier. |
 | Human leverage should be tested across at least two agent iterations, not inferred from a complete first handoff. | The supplied guidance identifies repeated human explanation as the expensive failure; the current adoption protocol stops after review. | High | A strong first handoff may make a second iteration unnecessary for some slices. |
+| The artifact model can structure work outside a conventional code repo, but this should not change positioning yet. | The assisted pilot succeeded in a non-Git research workspace. | Medium | Success may reflect the agent's familiarity with Product Loop Kit rather than general usability. |
 
 ## Product Implications
 
@@ -54,6 +59,7 @@ Keep observations separate from interpretations.
 | Run one external setup test with an AI-agent builder. | Tests Product Loop Kit adoption friction. | Add adoption feedback slice. | Capture setup time, score interpretation, validation failures, and confusing artifacts. |
 | Keep packaging conditional on real usage. | Prevents optimizing distribution before workflow value. | Keep distribution roadmap after v0.6. | Use real adoption evidence as the gate. |
 | Measure whether material corrections survive into a second task. | Makes human leverage observable rather than rhetorical. | Add a retention ledger and second-task check to v0.7. | Count extra prompts, durable destinations, and repeated corrections. |
+| Keep the assisted pilot as evidence of feasibility, not adoption. | Protects the meaning of the v0.7 exit gate. | Mark v0.7 in progress and retain the cold-builder requirement. | Next session must separate builder behavior from agent-authored setup. |
 
 ## Decisions
 
@@ -61,7 +67,7 @@ Decision: refine
 
 Why:
 
-The core product bet is stronger after self-application, validation, scoring, score tests, adoption docs, local checks, a reference case study, and runnable prototype evidence. The roadmap should now test whether durable context reduces repeated human explanation across iterations. It still needs external use before distribution work.
+The core product bet is stronger after self-application, validation, scoring, score tests, adoption docs, local checks, a reference case study, runnable prototype evidence, and one assisted real-work pilot. The roadmap should now test whether an independent builder can use the kit and whether durable context reduces repeated human explanation across iterations. It still needs cold external use before distribution work.
 
 ## Next External Loop
 
