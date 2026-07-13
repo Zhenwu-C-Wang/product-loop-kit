@@ -94,6 +94,8 @@ Fill the remaining artifacts:
 - `07-external-feedback-digest.md`: real user, customer, market, or repo-use signals
 - `08-decision-log.md`: durable decision and next loop
 
+Before creating the next agent task, move every material human correction out of chat or review prose and into the spec, eval plan, product vision, or decision log. The next agent session should not require the builder to explain the same product judgment again.
+
 ## Stop Conditions
 
 Stop the local loop and seek external feedback when:

@@ -1,12 +1,12 @@
 # Product Loop Kit External Feedback Digest
 
-Created: 2026-07-06
+Created: 2026-07-13
 
 ## Feedback Window
 
 - Start date: 2026-06-29
-- End date: 2026-07-06
-- Release/build: v0.6 external adoption kit candidate
+- End date: 2026-07-13
+- Release/build: v0.7 roadmap and human-token retention contract candidate
 - Audience: product-minded engineers using AI coding agents
 
 ## Sources
@@ -17,6 +17,7 @@ Created: 2026-07-06
 | Reference example | 1 | Medium | Typing Tutor has a full artifact chain plus runnable prototype evidence. |
 | Browser prototype QA | 2 viewports | Medium | Desktop and tablet checks prove local implementation behavior, not real learner usefulness. |
 | Score regression fixtures | 5 scenarios | Medium | P0-P4 scoring behavior is covered with generated temporary repos and the current repo. |
+| User-provided agentic coding loop guidance | 1 essay | Medium | Emphasizes early implementation, iterative specs, cheap agent tokens, expensive human context, and durable product memory. |
 | User interviews | 0 | Pending | Needed before claiming external adoption. |
 | Real product repo application | 0 | Pending | Needed before distribution choices. |
 
@@ -33,6 +34,7 @@ Keep observations separate from interpretations.
 | Validation creates a useful gate between initialized templates and complete product-loop work. | v0.2 checks | 1 | High |
 | Readiness scoring gives incomplete setups a maturity signal before strict validation passes. | v0.5 scoring | 1 | Medium |
 | First-loop and adoption guides make the next external test easier to run. | v0.6 docs | 2 | Medium |
+| The existing roadmap measures adoption readiness but not whether a builder must repeat important context in the next agent iteration. | Roadmap and adoption protocol review | 1 | High |
 
 ## Interpretations
 
@@ -42,6 +44,7 @@ Keep observations separate from interpretations.
 | The prototype proves implementation workflow, not learner usefulness. | Browser QA and tests are local; no learner/adult session has happened. | High | A close-fit user may still find the prototype immediately informative. |
 | A real repo or real learner session should come before packaging. | Current evidence is still local and documentation-focused. | High | Packaging might reduce enough setup friction to be worth doing earlier. |
 | Score tests reduce local regression risk but do not validate adoption. | P0-P4 fixtures passed, but no external builder has reacted to the score. | High | Score stability may itself make adoption easier. |
+| Human leverage should be tested across at least two agent iterations, not inferred from a complete first handoff. | The supplied guidance identifies repeated human explanation as the expensive failure; the current adoption protocol stops after review. | High | A strong first handoff may make a second iteration unnecessary for some slices. |
 
 ## Product Implications
 
@@ -50,6 +53,7 @@ Keep observations separate from interpretations.
 | Run one observed learner/adult session with the prototype. | Tests the product bet behind the case study. | Add observed-session feedback slice. | Capture hesitation, completion, adult difficulty choice, and next feature decision. |
 | Run one external setup test with an AI-agent builder. | Tests Product Loop Kit adoption friction. | Add adoption feedback slice. | Capture setup time, score interpretation, validation failures, and confusing artifacts. |
 | Keep packaging conditional on real usage. | Prevents optimizing distribution before workflow value. | Keep distribution roadmap after v0.6. | Use real adoption evidence as the gate. |
+| Measure whether material corrections survive into a second task. | Makes human leverage observable rather than rhetorical. | Add a retention ledger and second-task check to v0.7. | Count extra prompts, durable destinations, and repeated corrections. |
 
 ## Decisions
 
@@ -57,11 +61,11 @@ Decision: refine
 
 Why:
 
-The core product bet is stronger after self-application, validation, scoring, score tests, adoption docs, local checks, a reference case study, and runnable prototype evidence. It still needs external use before distribution work.
+The core product bet is stronger after self-application, validation, scoring, score tests, adoption docs, local checks, a reference case study, and runnable prototype evidence. The roadmap should now test whether durable context reduces repeated human explanation across iterations. It still needs external use before distribution work.
 
 ## Next External Loop
 
 - Audience: one learner/adult pair and 1-2 engineers who actively use coding agents.
-- Learning goal: Can the learner complete a session, can the adult choose difficulty, and can an engineer adapt `.loop/` without hand-holding?
-- Release or prototype needed: v0.6 candidate with first-loop guide, external adoption guide, validator, score, score tests, Typing Tutor prototype, screenshots, case study, and self-application artifacts.
-- Deadline: before v0.7 distribution work.
+- Learning goal: Can the learner complete a session, can the adult choose difficulty, and can an engineer adapt `.loop/` without hand-holding while avoiding repeated product explanations in a second task?
+- Release or prototype needed: v0.7 candidate with first-loop guide, human-token adoption measures, validator, score, score tests, Typing Tutor prototype, screenshots, case study, and self-application artifacts.
+- Deadline: before v0.8 iteration-memory or distribution work.

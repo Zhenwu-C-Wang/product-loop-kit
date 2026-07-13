@@ -16,6 +16,7 @@ Use this log for decisions that change product direction, engineering constraint
 | 2026-06-29 | Organize repo for asynchronous sharing before adding more features. | User request | Add more framework content first | External feedback |
 | 2026-07-06 | Position Product Loop Kit as the product artifact layer and add readiness scoring before packaging. | Developer comparison | Copy agent-ops tooling scope, package immediately, keep validator only | External feedback |
 | 2026-07-06 | Add first-loop guidance, external adoption protocol, score regression tests, and local share checks before packaging. | Developer review | Package immediately, add more examples, skip regression checks | External feedback |
+| 2026-07-13 | Make human-token retention the v0.7 adoption proof and defer distribution behind observed second-iteration reuse. | User-provided agentic coding loop guidance and developer review | Keep distribution as v0.7, add a loop runner now, treat artifact completeness as proof | External feedback |
 
 ## Entry Template
 

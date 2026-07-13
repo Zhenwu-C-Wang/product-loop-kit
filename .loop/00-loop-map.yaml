@@ -75,6 +75,7 @@ loops:
 control_rules:
   - "No new template ships without a corresponding purpose in the framework doc."
   - "No CLI/script behavior changes ship without a quick command-level verification."
+  - "No material human correction reaches the next task without a durable destination."
   - "No repeated confusion from users survives twice without becoming a doc or template change."
   - "No product vision change happens without a stated source."
   - "No external feedback enters the roadmap without interpretation and confidence."

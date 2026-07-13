@@ -44,6 +44,7 @@ We believe that:
 - Plain files first.
 - Evidence before merge.
 - Human context stays explicit.
+- Material human corrections become durable product memory before the next agent task.
 - Evals grow from repeated failure modes.
 - External feedback changes vision, not just backlog order.
 

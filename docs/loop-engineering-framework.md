@@ -108,6 +108,7 @@ If any field is missing, the loop becomes vague and requires human rescue.
 - Review the implemented workflow as a user would.
 - Decide whether the current behavior is good enough to ship, needs another agent iteration, or changes the product direction.
 - Clarify ambiguous parts of the spec.
+- Persist material human corrections in the spec, eval plan, product vision, or decision log before the next agent task.
 - Convert repeated defects into evals.
 - Create the next small agent task.
 
@@ -217,6 +218,7 @@ Use this sequence for a new product slice:
 
 - No agent task starts without acceptance criteria.
 - No merge happens without evidence.
+- No material human correction reaches the next task without a durable destination.
 - No repeated failure mode survives twice without becoming an eval.
 - No vision change happens without a stated source.
 - No external feedback enters the backlog without interpretation and confidence.

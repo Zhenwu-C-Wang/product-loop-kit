@@ -1,13 +1,13 @@
 # Product Loop Kit Developer Review
 
-Created: 2026-07-06
+Created: 2026-07-13
 
 ## Review Context
 
-- Slice: v0.6 external adoption kit and score tests
-- Build/PR: local working tree
+- Slice: roadmap refresh and human-token retention contract
+- Build/PR: local working tree on `main`
 - Reviewer: maintainer
-- Review window: before the first real external adoption loop
+- Review window: before the first v0.7 external adoption session
 
 ## Decision
 
@@ -17,49 +17,59 @@ Decision: accept
 
 | Question | Answer |
 | --- | --- |
-| Does the product behavior match the intended user outcome? | Yes. The repo now gives a smaller first-use path, a concrete external adoption protocol, regression coverage for scoring, and a local check suite for core checks. |
-| Does the evidence cover the acceptance criteria? | Yes. Evidence covers first-loop docs, adoption docs, score tests, validator, readiness score, prototype tests, shell syntax, YAML parsing, path checks, and whitespace. |
-| What feels confusing, weak, or overbuilt? | The first-loop guide may still be too long for a truly cold user; only an adoption session can tell whether it reduces friction enough. |
-| What human context should be injected into the next loop? | Watch how a real builder reacts to the first four files and whether P2 feels like a useful stopping point before agent handoff. |
-| What can only be answered by external feedback? | Whether a builder can use the kit without a live walkthrough and whether the agent task actually reduces prompt-writing work. |
+| Does the product behavior match the intended user outcome? | Yes. The roadmap now makes reduced repeated explanation a measurable adoption outcome, and existing artifacts retain material corrections without adding another mandatory file. |
+| Does the evidence cover the acceptance criteria? | Yes. Roadmap, adoption measures, review template, framework rules, self-application provenance, and the full local regression suite are covered. |
+| What feels confusing, weak, or overbuilt? | The phrase human-token retention may feel abstract until the adoption guide shows a concrete correction and second-task result. The ledger must stay limited to material product judgment. |
+| What human context should be injected into the next loop? | A material correction changes future behavior, quality bar, constraint, or evaluation. Ordinary debugging chatter should not become permanent product memory. |
+| What can only be answered by external feedback? | Whether a real builder reaches implementation earlier, whether the ledger feels useful, and whether a second agent task actually reuses recorded context. |
 
 ## Feedback To Agent
 
-- Keep first-use guidance focused on one product slice.
-- Keep external adoption notes observation-first and privacy-safe.
-- Keep score tests small enough to update intentionally.
-- Do not add distribution or packaging until one adoption loop produces evidence.
+- Keep v0.7 focused on one real builder and one small two-step product slice.
+- Observe first; do not rescue the builder unless blocked.
+- Record exact extra prompts and repeated corrections, then anonymize product details.
+- Do not begin v0.8 memory tooling or distribution until the adoption evidence identifies the need.
+
+## Human-Token Retention
+
+| Human Correction Or Decision | Why It Matters | Durable Destination | Update Made |
+| --- | --- | --- | --- |
+| Human product context is more expensive than additional agent iteration. | The product should optimize for less repeated explanation, not merely more complete files. | product vision, roadmap, product spec, decision log | Added a product principle, v0.7 proof goal, instrumentation, and dated decision. |
+| Specs should be refined through early implementation instead of becoming an up-front gate. | The kit could otherwise reproduce waterfall behavior. | roadmap, external adoption protocol | Added the imperfect-spec and time-to-first-implementation measures. |
+| A material correction should survive into the next agent task. | Chat-only feedback wastes the builder's context when sessions reset. | loop-map control rule, framework, first-loop guide, review template | Added a durable-destination rule and second-task reuse check. |
 
 ## Spec Changes
 
 | Change | Reason | Source |
 | --- | --- | --- |
-| Add first-loop guide | First-time users need a smaller path than all 9 artifacts. | Developer review |
-| Add external adoption guide | The next proof point is real use, not more local polish. | Developer review |
-| Add score regression tests | Scoring became a user-facing contract and needs stable fixtures. | Developer review |
-| Add local check suite | Core checks should run consistently before share or merge. | Developer review |
+| Replace v0.7 distribution with external adoption and human-token proof | External evidence is the next product risk. | User-provided guidance and developer review |
+| Add v0.8 durable iteration memory | Git history may not be discoverable enough across agent sessions. | Product risk identified during review |
+| Add v0.9 executable loop contract | Automation should follow a proven manual contract. | Product-layer boundary and supplied guidance |
+| Add material-correction retention rule | Important human judgment must not remain only in chat. | User-provided guidance |
 
 ## New Or Updated Evals
 
 | Eval | Reason | Priority |
 | --- | --- | --- |
-| Score regression tests | Protect P0-P4 readiness behavior. | High |
-| Share checklist command parity | Keep documented checks aligned with actual local commands. | High |
-| First-loop and adoption docs path check | Prevent the new adoption entrypoints from drifting. | High |
+| Extra-prompt and repeated-correction count | Measures wasted human explanation. | High |
+| Durable-destination check | Ensures a material correction reaches product memory. | High |
+| Second-task reuse observation | Tests whether retained context changes agent behavior. | High |
+| Time to first useful implementation | Detects specification ceremony that delays learning. | Medium |
 
 ## Next Agent Task
 
-- Goal: Run one external adoption loop with a real product repo or real AI-agent builder.
-- Scope: Ask them to follow `docs/first-loop.md`, run score and validation, then report friction using `docs/external-adoption-loop.md`.
-- Acceptance criteria: External user reaches at least P2 or explains why they could not; they can explain the product-layer role; they identify one confusing or useful artifact.
-- Required evidence: updated `.loop/07-external-feedback-digest.md`, `.loop/08-decision-log.md`, and any template or doc changes driven by observed friction.
+- Goal: Run one v0.7 external adoption loop with a real coding-agent builder and a small two-step product slice.
+- Scope: Observe setup, first implementation, developer correction, durable update, and a second agent task without a live walkthrough.
+- Acceptance criteria: Builder reaches evidence and review or records a clear stop; every material correction gets a durable destination; second task reuses at least one recorded correction or clearly records why reuse could not be tested.
+- Required evidence: setup time, time to first useful evidence, extra prompts, skipped fields, correction ledger, second-task behavior, updated external feedback digest, and dated decision.
+- Prior corrections the agent must reuse without re-prompting: keep the first-loop surface lightweight; do not equate P4 readiness with external validation; persist material corrections before the next task.
 
 ## Decision Log Entry
 
-Date: 2026-07-06
+Date: 2026-07-13
 
-Decision: Add first-loop guidance, external adoption protocol, score regression tests, and local share checks before packaging.
+Decision: Make human-token retention the v0.7 adoption proof and defer distribution behind observed second-iteration reuse.
 
-Reason: The next product risk is first-use friction and score drift, not installation mechanics.
+Reason: The next uncertainty is not whether the artifact set is complete, but whether it preserves human product judgment well enough to reduce repeated explanation in real work.
 
 Next loop: External feedback loop.

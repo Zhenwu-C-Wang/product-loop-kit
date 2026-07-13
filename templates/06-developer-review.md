@@ -29,6 +29,16 @@ Decision: accept | iterate | change spec | change vision | stop
 - 
 - 
 
+## Human-Token Retention
+
+Record only corrections or decisions that should survive into future agent sessions.
+
+| Human Correction Or Decision | Why It Matters | Durable Destination | Update Made |
+| --- | --- | --- | --- |
+|  |  | spec \| eval \| vision \| decision log |  |
+
+Before creating the next agent task, persist every material item above in its durable destination. Do not rely on this review or chat history alone.
+
 ## Spec Changes
 
 | Change | Reason | Source |
@@ -47,6 +57,7 @@ Decision: accept | iterate | change spec | change vision | stop
 - Scope:
 - Acceptance criteria:
 - Required evidence:
+- Prior corrections the agent must reuse without re-prompting:
 
 ## Decision Log Entry
 

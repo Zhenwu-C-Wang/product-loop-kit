@@ -71,6 +71,7 @@ loops:
 control_rules:
   - "No agent task starts without acceptance criteria."
   - "No merge happens without evidence."
+  - "No material human correction reaches the next task without a durable destination."
   - "No repeated failure mode survives twice without becoming an eval."
   - "No vision change happens without a stated source."
   - "No external feedback enters the backlog without interpretation and confidence."

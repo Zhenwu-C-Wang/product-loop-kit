@@ -47,13 +47,28 @@ Record observations, not interpretations:
 
 | Question | Evidence To Capture |
 | --- | --- |
+| How quickly did implementation start? | Minutes from opening the kit to the first agent task and first useful implementation evidence. |
 | Could they explain the product-layer role? | Their one-sentence explanation after reading README. |
 | Which artifact did they open first? | File path and why. |
 | Which fields felt unclear or redundant? | Exact field names and comments. |
 | Did the score help them decide what to fill next? | Score level, next actions, and reaction. |
 | Did the agent task reduce prompt-writing effort? | Before/after prompt or task handoff. |
+| What did the builder have to add after the agent started? | Count and summarize extra prompts, corrections, and missing context. |
+| Which correction should never need to be repeated? | Exact correction, why it matters, and the spec, eval, vision, or decision entry that retains it. |
+| Did the second task reuse recorded context? | Whether the agent followed the correction without the builder restating it. |
+| Did implementation change the spec? | Assumption exposed by the build and the resulting spec or eval change. |
 | Did validation failure feel actionable? | Failed checks and whether they knew what to fix. |
 | What did they skip? | Artifact, field, check, and reason. |
+
+## Human-Token Ledger
+
+Use this small ledger for material corrections. Do not record every conversational detail.
+
+| Human Correction Or Decision | Why It Matters | Durable Destination | Repeated In Next Task? |
+| --- | --- | --- | --- |
+|  |  | spec \| eval \| vision \| decision log | yes \| no \| not tested |
+
+A material correction changes expected behavior, the product quality bar, a constraint, or how success is evaluated. Persist it before creating the next agent task. Ordinary implementation chatter does not need to become product memory.
 
 ## Success Criteria
 
@@ -63,6 +78,8 @@ The loop is promising when:
 - They can explain why product artifacts sit upstream of agent execution.
 - The agent task is specific enough for a coding agent to start.
 - Evidence and review reveal a clear next product decision.
+- Every material human correction has a durable destination before the next task.
+- A second agent task reuses at least one recorded correction without requiring the builder to repeat it.
 
 The loop needs refinement when:
 
@@ -70,6 +87,8 @@ The loop needs refinement when:
 - They cannot tell whether a score or validation failure matters.
 - The first four files feel too heavy for one slice.
 - The agent task still turns into a long custom prompt.
+- Important product corrections remain only in chat or review prose.
+- The builder must repeat a correction that was supposedly captured in the repo.
 
 ## Evidence To Bring Back
 
@@ -88,7 +107,10 @@ Do not copy private product details into this repo. Summarize:
 - Type of repo
 - Product slice shape
 - Score and validation outcome
+- Time to first agent task and first useful evidence
+- Number of extra prompts and repeated corrections
 - Confusing artifact or field
+- Durable destination for each material correction
 - Decision made from the feedback
 
 If the adoption repo contains sensitive data, keep raw notes outside this public reference and record only anonymized lessons.
