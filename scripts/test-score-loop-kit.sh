@@ -6,6 +6,7 @@ repo_root="$(cd -- "$script_dir/.." && pwd)"
 score_script="$script_dir/score-loop-kit.sh"
 init_script="$script_dir/init-loop-kit.sh"
 expected_file="$repo_root/tests/fixtures/score/expected-levels.tsv"
+evidence_boundary='Evidence boundary: readiness scores artifact completeness; they do not prove external adoption or product-market validation.'
 
 tmp_root="$(mktemp -d)"
 trap 'rm -rf "$tmp_root"' EXIT
@@ -200,4 +201,5 @@ while IFS=$'\t' read -r scenario expected_line expected_category; do
 
   assert_contains "$output" "$expected_line" "$scenario"
   assert_contains "$output" "$expected_category" "$scenario"
+  assert_contains "$output" "$evidence_boundary" "$scenario"
 done < "$expected_file"

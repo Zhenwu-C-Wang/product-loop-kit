@@ -8,6 +8,9 @@ Usage:
 
 Scores a target repo's .loop/ artifacts for product-loop readiness.
 
+The score measures artifact completeness and does not prove external adoption
+or product-market validation.
+
 This complements validate-loop-kit.sh:
   - validate-loop-kit.sh is a strict pass/fail gate.
   - score-loop-kit.sh shows maturity across product context, agent handoff,
@@ -275,7 +278,9 @@ printf '%s\n' '- P0 not-ready: missing or unusable loop artifacts'
 printf '%s\n' '- P1 initialized: .loop/ exists but product context is incomplete'
 printf '%s\n' '- P2 agent-ready: spec, evals, and task can guide implementation'
 printf '%s\n' '- P3 evidence-ready: implementation evidence and developer review are recorded'
-printf '%s\n\n' '- P4 external-learning-ready: the loop can feed real user or repo feedback back into product direction'
+printf '%s\n\n' '- P4 external-learning-ready: artifacts can capture external learning; the score does not prove external adoption'
+
+printf '%s\n\n' 'Evidence boundary: readiness scores artifact completeness; they do not prove external adoption or product-market validation.'
 
 if [[ "${#next_actions[@]}" -eq 0 ]]; then
   printf 'Next action: run the next external feedback loop with a real user or real product repo.\n'

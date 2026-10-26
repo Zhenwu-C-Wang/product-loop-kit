@@ -1,90 +1,85 @@
 # Product Loop Kit Product Spec
 
-Created: 2026-07-13
+Created: 2026-10-25
 
 ## Slice
 
-- Name: roadmap refresh and human-token retention contract
+- Name: readiness evidence boundary
 - Owner: maintainer
 - Status: complete
-- Related vision bet: Product Loop Kit should preserve scarce human product judgment across cheap agent iterations while keeping early 0-to-1 work lightweight.
+- Related vision bet: Product Loop Kit should make the proof level of every readiness signal explicit so local completeness cannot be mistaken for real adoption.
 
 ## Problem
 
-The current roadmap reaches an external adoption milestone, but it does not yet make the most important learning goal explicit: whether durable repo context prevents a builder from repeating the same product correction in the next agent iteration.
+The readiness command reports `100/100 (P4 external-learning-ready)` when the repo-owned artifact system is complete. The roadmap and feedback records already say that P4 is not external validation, but the CLI output itself did not state that boundary. A reader could therefore treat a local artifact score as proof that an independent builder adopted the product.
 
-The adoption protocol measures setup friction, but it does not capture time to first implementation, extra prompts, repeated corrections, or where a material human decision was persisted. Without those signals, a complete artifact set could look successful while still wasting the builder's context and attention.
+The v0.7 adoption gate cannot be completed without a cold real-builder loop. This slice improves the product while that external dependency remains unavailable by turning a repeatedly important evidence boundary into executable CLI behavior and a regression check.
 
 ## User Story
 
-As a product-minded engineer iterating with coding agents, I want material product corrections to become durable repo memory before the next task, so that I can spend my time on new judgment instead of re-explaining old decisions.
+As a maintainer or evaluator reading a readiness result, I want the command to say what its score does and does not prove, so that I can distinguish artifact readiness from external adoption evidence without finding a separate caveat.
 
 ## Requirements
 
 | ID | Requirement | Priority | Notes |
 | --- | --- | --- | --- |
-| R1 | Reframe the roadmap around external adoption, human-token retention, durable iteration memory, and an executable loop contract. | Must | Keep distribution after evidence, not before it. |
-| R2 | Add human-token measures to the external adoption protocol. | Must | Capture time, extra prompts, repeated corrections, and second-task reuse. |
-| R3 | Add a durable-correction section to developer review. | Must | Each material correction names its destination and resulting update. |
-| R4 | Update framework and first-loop guidance with the retention rule. | Must | Important feedback must not remain only in chat or review prose. |
-| R5 | Self-apply the new rule in Product Loop Kit artifacts. | Must | Record the source, decision, evidence, and next external loop. |
-| R6 | Preserve all existing validation and regression evidence. | Must | Do not weaken validator or score behavior. |
+| R1 | Print an explicit evidence boundary in every readiness report. | Must | State that the score measures artifact completeness and does not prove external adoption or product-market validation. |
+| R2 | Describe P4 as readiness to capture external learning, not proof that adoption occurred. | Must | Keep the stable `P4 external-learning-ready` level name. |
+| R3 | Explain the same boundary in the README and reviewer tour. | Must | A copied headline score must not stand alone without its meaning. |
+| R4 | Lock the boundary with score regression tests for P0 through P4. | Must | Every fixture output must contain the exact boundary statement. |
+| R5 | Keep v0.7 in progress and retain the cold-builder exit gate. | Must | This local improvement is not adoption evidence. |
+| R6 | Preserve the existing validator, score thresholds, prototype behavior, shell syntax, and YAML validity. | Must | No new dependency or artifact is added. |
 
 ## Acceptance Criteria
 
 | ID | Criterion | Verification Method |
 | --- | --- | --- |
-| A1 | Roadmap marks v0.7 external adoption and human-token proof as the next milestone and defers heavier automation. | Roadmap inspection. |
-| A2 | Adoption guide captures time to evidence, extra prompts, material corrections, durable destinations, and reuse in a second task. | Documentation inspection. |
-| A3 | Developer review template requires a human-token retention ledger and prior corrections in the next task. | Template inspection. |
-| A4 | Framework and first-loop guide require material human corrections to be persisted before the next task. | Documentation inspection. |
-| A5 | Self-application artifacts cite the user-provided agentic-loop guidance and record the resulting product decision. | `.loop` inspection. |
-| A6 | Validator, readiness score, score tests, prototype tests, shell syntax, YAML, and whitespace checks still pass. | Run the local check suite. |
+| A1 | `score-loop-kit.sh` prints the evidence-boundary sentence for readiness reports at every level. | Run the P0-P4 score regression fixtures. |
+| A2 | The P4 level description says artifacts can capture external learning and does not claim adoption. | Inspect CLI output and source. |
+| A3 | README, repo tour, and roadmap use the same artifact-readiness versus adoption distinction. | Documentation inspection and targeted search. |
+| A4 | Score regression tests fail if the boundary disappears from any P0-P4 scenario. | Inspect the shared assertion and run the test script. |
+| A5 | The full local regression suite passes with the readiness score still at 100/100 P4. | Run validator, score, score tests, prototype tests, syntax, YAML, and whitespace checks. |
+| A6 | The decision log records the product decision while v0.7 remains externally blocked. | Inspect the dated decision and roadmap status. |
 
 ## UX Notes
 
-- Entry point: `docs/roadmap.md` for sequence and `docs/external-adoption-loop.md` for the next experiment.
-- Main flow: imperfect spec -> early implementation -> developer reaction -> durable correction -> second agent task -> check for repeated explanation.
-- Empty state: the retention ledger may be empty when review produces no material correction.
-- Error state: a material correction with no durable destination blocks the next agent task.
-- Accessibility: plain Markdown tables and instructions.
-- Mobile/responsive behavior: Not applicable.
+- Entry point: `./scripts/score-loop-kit.sh [target-dir]`.
+- Main flow: run score -> read level -> read evidence boundary -> choose next action using the correct proof level.
+- Empty state: even P0 output explains the evidence boundary.
+- Error state: invalid target behavior is unchanged.
+- Accessibility: the boundary is plain text and does not rely on color or formatting.
 
 ## Data And State
 
-- Inputs: user-provided essay about iterative specs, cheap agent tokens, expensive human tokens, and durable product memory; current roadmap and loop artifacts.
-- Outputs: revised roadmap, adoption measures, review template, framework rules, and self-application evidence.
-- State transitions: adoption-ready kit -> adoption experiment with an explicit human-token learning goal.
-- Persistence: roadmap, templates, `.loop` artifacts, and git history.
-- Privacy/security considerations: adoption evidence remains anonymized and avoids private product details.
+- Inputs: current `.loop/` artifact files.
+- Outputs: readiness score, category detail, level descriptions, evidence boundary, and next action.
+- State transitions: none; scoring remains read-only.
+- Persistence: regression test, documentation, roadmap, and decision log.
+- Privacy/security considerations: no product or user data is collected.
 
 ## Instrumentation
 
 | Event/Metric | Trigger | Purpose |
 | --- | --- | --- |
-| Time to first agent task | Builder hands off the first bounded task | Detects whether spec work delays useful implementation. |
-| Extra human prompts | Builder adds context after the first task starts | Measures missing product context. |
-| Material correction retention | Developer review completes | Ensures important judgment gets a durable destination. |
-| Repeated correction count | Second agent task completes | Tests whether repo memory reduced repeated explanation. |
-| Spec or eval change from implementation | Review changes an artifact | Tests whether specs are genuinely iterative. |
+| Boundary assertion count | Score fixture completes | Proves all five P0-P4 scenarios expose the boundary. |
+| P4 headline stability | Current repo is scored | Prevents an evidence clarification from changing score thresholds or level names. |
+| Cold-builder adoption evidence | Independent v0.7 session completes | Remains the separate signal required to advance the roadmap. |
 
 ## Dependencies
 
-- One real builder and real product repo are required for the v0.7 adoption proof, but not for this roadmap and instrumentation slice.
-- Existing shell, Node, and optional Ruby checks.
+- Existing POSIX-like shell environment and repository fixtures.
+- A real builder is still required for the v0.7 exit gate, but not for this bounded CLI slice.
 
 ## Non-Goals
 
-- Claiming external adoption from this documentation change.
-- Adding a loop runner or agent orchestration runtime now.
-- Archiving every conversation detail as product memory.
-- Requiring every one-time implementation comment to become an eval.
-- Packaging or distribution work before v0.7 evidence.
+- Claiming external adoption, product-market validation, or v0.7 completion.
+- Contacting a tester or running a human session.
+- Renaming score levels or changing thresholds.
+- Adding packaging, telemetry, orchestration, or a new dependency.
 
 ## Open Questions
 
 | Question | Owner | Needed By |
 | --- | --- | --- |
-| Is git history sufficient for completed slice memory, or is a lightweight archive needed? | Maintainer | After v0.7 adoption |
-| What counts as an expensive enough first failure to add an eval immediately? | Maintainer | During v0.7 review |
-| Which second-task behavior best demonstrates that a correction was retained? | Maintainer | Before the adoption session |
+| Will an independent builder interpret P4 correctly without explanation? | Maintainer | During the cold v0.7 session |
+| Should a later machine-readable score mode expose evidence scope as a field? | Maintainer | Only if v0.9 is justified by adoption evidence |

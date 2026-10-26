@@ -5,8 +5,8 @@ Created: 2026-07-13
 ## Feedback Window
 
 - Start date: 2026-06-29
-- End date: 2026-07-13
-- Release/build: v0.7 roadmap and human-token retention contract candidate
+- End date: 2026-10-25
+- Release/build: v0.7 candidate with explicit readiness evidence boundary
 - Audience: product-minded engineers using AI coding agents
 
 ## Sources
@@ -19,6 +19,7 @@ Created: 2026-07-13
 | Score regression fixtures | 5 scenarios | Medium | P0-P4 scoring behavior is covered with generated temporary repos and the current repo. |
 | User-provided agentic coding loop guidance | 1 essay | Medium | Emphasizes early implementation, iterative specs, cheap agent tokens, expensive human context, and durable product memory. |
 | Anonymized assisted real-work pilot | 1 slice | Medium | Applied the kit to a non-Git, document-heavy research workspace and built an offline workflow prototype; the agent filled the artifacts, so this is not cold adoption. |
+| Readiness evidence-boundary regression | 5 score levels | High | P0-P4 now state that artifact completeness does not prove external adoption or product-market validation. |
 | User interviews | 0 | Pending | Needed before claiming external adoption. |
 | Real product repo application | 0 | Pending | Needed before distribution choices. |
 
@@ -39,6 +40,7 @@ Keep observations separate from interpretations.
 | An assisted real-work workspace reached P2 at 71/100 before implementation and P4 at 100/100 after evidence and review were recorded. | Readiness score before and after the pilot | 1 | High |
 | The pilot produced browser-tested evidence in about 35 minutes and visual comparison found two implementation defects before review. | Timestamped pilot evidence and screenshots | 1 slice | High |
 | The pilot had no independent builder and no second human-correction task. | Pilot setup | 1 | High |
+| The readiness CLI previously required separate documentation to understand that P4 was not adoption proof. | CLI and documentation comparison | 1 | High |
 
 ## Interpretations
 
@@ -60,6 +62,7 @@ Keep observations separate from interpretations.
 | Keep packaging conditional on real usage. | Prevents optimizing distribution before workflow value. | Keep distribution roadmap after v0.6. | Use real adoption evidence as the gate. |
 | Measure whether material corrections survive into a second task. | Makes human leverage observable rather than rhetorical. | Add a retention ledger and second-task check to v0.7. | Count extra prompts, durable destinations, and repeated corrections. |
 | Keep the assisted pilot as evidence of feasibility, not adoption. | Protects the meaning of the v0.7 exit gate. | Mark v0.7 in progress and retain the cold-builder requirement. | Next session must separate builder behavior from agent-authored setup. |
+| State the readiness evidence boundary at the point of use. | Prevents a 100/100 artifact score from being reported as external proof. | Keep the P4 name stable and clarify its meaning. | Assert the boundary in every P0-P4 regression fixture. |
 
 ## Decisions
 

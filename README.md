@@ -104,6 +104,8 @@ Expected result for this repo:
 Product Loop Readiness: 100/100 (P4 external-learning-ready)
 ```
 
+This score measures the completeness of the repo-owned loop artifacts. Even at P4, it does not prove external adoption or product-market validation.
+
 ## Use In Your Repo
 
 Initialize the loop kit inside any product repo:
@@ -155,7 +157,7 @@ The score is intentionally product-centered:
 | P1 initialized | `.loop/` exists but product context is incomplete |
 | P2 agent-ready | Spec, evals, and task can guide implementation |
 | P3 evidence-ready | Implementation evidence and developer review are recorded |
-| P4 external-learning-ready | The loop can feed real user or repo feedback back into product direction |
+| P4 external-learning-ready | The artifacts can capture external learning; the score does not prove external adoption |
 
 ## What Is In This Repo
 

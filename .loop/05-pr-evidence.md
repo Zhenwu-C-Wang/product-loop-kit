@@ -1,72 +1,66 @@
 # Product Loop Kit PR Evidence
 
-Created: 2026-07-13
+Created: 2026-10-25
 
 ## Summary
 
-- Slice: roadmap refresh and human-token retention contract
+- Slice: readiness evidence boundary
 - Branch/PR: local working tree on `main`
 - Agent: Codex
 - Status: ready for developer review
 
 ## Changes
 
-- Reordered the roadmap so external adoption and human-token proof precede distribution and executable automation.
-- Added v0.8 durable iteration memory and v0.9 executable loop contract as evidence-gated later milestones.
-- Expanded the external adoption protocol to measure time to implementation, extra prompts, material corrections, durable destinations, and second-task reuse.
-- Added a human-token retention ledger and prior-correction field to the developer review template.
-- Added the durable-correction control rule to the framework, first-loop guide, loop-map template, and Product Loop Kit's own artifacts.
-- Recorded the user-provided guidance as a feedback source and product decision without claiming real adoption.
+- Added an evidence-boundary statement to readiness help and every successful score report.
+- Reworded the P4 description so it means the artifacts can capture external learning, not that adoption already happened.
+- Added one exact boundary assertion to every P0-P4 score fixture.
+- Aligned README, repo tour, roadmap, and self-application artifacts with the same proof boundary.
+- Kept v0.7 in progress because the assisted pilot is not a cold real-builder loop.
 
 ## Acceptance Criteria Evidence
 
 | Criterion | Evidence | Status |
 | --- | --- | --- |
-| A1 | `docs/roadmap.md` marks v0.7 as external adoption and human-token proof, followed by v0.8 memory and v0.9 executable contracts. | Complete |
-| A2 | `docs/external-adoption-loop.md` now captures first-evidence time, extra prompts, correction destinations, repeated context, and second-task reuse. | Complete |
-| A3 | `templates/06-developer-review.md` contains a Human-Token Retention ledger and prior-corrections field for the next task. | Complete |
-| A4 | Framework control rules and first-loop guidance require material corrections to move into durable artifacts before the next task. | Complete |
-| A5 | Product vision, spec, external feedback digest, and decision log retain the source and resulting decision. | Complete |
-| A6 | Validator, readiness score, score tests, prototype tests, shell syntax, YAML parsing, retention search, and whitespace checks pass. | Complete |
+| A1 | `scripts/test-score-loop-kit.sh` asserted the exact boundary in all 5 P0-P4 fixture outputs. | Complete |
+| A2 | CLI output describes P4 as artifacts able to capture external learning and explicitly says the score does not prove adoption. | Complete |
+| A3 | `README.md`, `docs/repo-tour.md`, and `docs/roadmap.md` distinguish artifact readiness from adoption evidence. | Complete |
+| A4 | The test script applies the shared `evidence_boundary` assertion inside the fixture loop, so removal fails every affected scenario. | Complete |
+| A5 | Validator, readiness score, score tests, prototype tests, shell syntax, YAML parsing, boundary search, and whitespace checks passed. | Complete |
+| A6 | `.loop/08-decision-log.md` records the 2026-10-25 decision; the roadmap still marks v0.7 in progress. | Complete |
 
 ## Checks Run
 
 | Check | Command/Method | Result | Notes |
 | --- | --- | --- | --- |
 | Validator pass | `./scripts/validate-loop-kit.sh .` | Pass | 63 passed, 0 warnings, 0 failed. |
-| Product-loop readiness score | `./scripts/score-loop-kit.sh .` | Pass | 100/100, P4 external-learning-ready. |
-| Score regression tests | `./scripts/test-score-loop-kit.sh` | Pass | P0, P1, P2, P3, and P4 assertions passed. |
-| Prototype scoring tests | `node examples/typing-tutor/prototype/scoring.test.js` | Pass | Six tests passed. |
+| Product-loop readiness score | `./scripts/score-loop-kit.sh .` | Pass | 100/100 P4; output includes the evidence boundary and cold external-feedback next action. |
+| Score regression tests | `./scripts/test-score-loop-kit.sh` | Pass | 15 assertions passed: headline, category, and boundary across each of 5 levels. |
+| Prototype scoring tests | `node examples/typing-tutor/prototype/scoring.test.js` | Pass | 6 tests passed. |
 | Shell syntax | `bash -n scripts/init-loop-kit.sh scripts/validate-loop-kit.sh scripts/score-loop-kit.sh scripts/test-score-loop-kit.sh` | Pass | All scripts parse. |
-| YAML parse | Ruby YAML parse for `.loop`, template, and Typing Tutor loop maps | Pass | All loop maps parse. |
-| Retention contract | `rg` across docs, templates, and `.loop` | Pass | Rule appears in the roadmap, framework, guides, templates, and self-application artifacts. |
+| YAML parse | Ruby YAML parse for `.loop`, template, and Typing Tutor loop maps | Pass | All 3 loop maps parse. |
+| Boundary consistency | Targeted `rg` across scripts, README, docs, and `.loop` | Pass | CLI, regression test, user docs, and active loop artifacts expose the distinction. |
 | Whitespace | `git diff --check` | Pass | No whitespace errors. |
 
 ## Product Inspection
 
-- Roadmap sequence: completed foundation -> v0.7 external adoption -> v0.8 durable memory -> v0.9 executable contract -> v1.0 proven workflow.
-- Adoption path: first imperfect spec -> early implementation -> human correction -> durable destination -> second task -> repeated-context check.
-- First-loop surface: remains the same four initial artifacts; no tenth mandatory artifact was added.
-- Product memory: the supplied product judgment is retained in vision, spec, feedback digest, roadmap, and decision log.
-- Claim boundary: external user interviews and real product repo applications remain explicitly at zero.
+- Command behavior: all successful readiness reports expose the proof boundary before the next action.
+- Compatibility: the 100/100 headline, P0-P4 names, thresholds, and fixture expectations remain stable.
+- Documentation: copied P4 examples are immediately followed by the limitation.
+- Roadmap: v0.7 remains in progress; no later milestone was started.
+- Claim boundary: local tests prove implementation behavior, not independent adoption or product-market validation.
 
 ## Risks And Tradeoffs
 
 | Risk | Impact | Mitigation/Next Step |
 | --- | --- | --- |
-| A retention ledger could become documentation ceremony. | Builders may record low-value conversation instead of product memory. | Definition limits entries to behavior, quality bar, constraint, or evaluation changes. |
-| A second task may not naturally fit a 30-60 minute adoption session. | The strongest retention signal may be unavailable. | Choose a small two-step slice or mark reuse as not tested rather than fabricating evidence. |
-| Self-application can still create false confidence. | Local completeness may be mistaken for adoption proof. | Roadmap and feedback digest keep real adoption as the v0.7 exit gate. |
-| Git history may be insufficient as slice memory. | New agent sessions may not find old corrections. | Test discoverability in v0.7 before building v0.8 history support. |
+| Repeated caveat text adds output length. | The command becomes slightly less compact. | Keep it to one stable sentence and place it after level definitions. |
+| Users may still ignore the boundary. | P4 could still be overclaimed in downstream summaries. | Observe interpretation in the cold-builder session and revise wording only from real feedback. |
+| Stronger claim hygiene does not advance external proof. | v0.7 remains open. | Next substantive loop must involve one independent builder and two bounded task iterations. |
 
-## Skipped Or Blocked Checks
+## External Evidence Status
 
-| Check | Reason | Owner |
-| --- | --- | --- |
-| Real external adoption | Requires a real builder and real product repo. | Maintainer |
-| Second-agent-task retention test | Belongs to the v0.7 adoption session. | Maintainer |
-
-## Questions For Developer Review
-
-- Can the adoption session naturally include two bounded agent tasks without making the test artificial?
-- Is a material-correction ledger enough, or will v0.7 show that completed slice history needs a dedicated lightweight archive?
+- Assisted feasibility pilot: complete, but agent-authored and not cold adoption.
+- Independent builder: 0.
+- Real product repo loop completed by that builder: 0.
+- Second-task reuse of a persisted human correction: not tested.
+- v0.7 status: in progress.

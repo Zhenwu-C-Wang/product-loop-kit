@@ -63,6 +63,8 @@ summary: 63 passed, 0 warning(s), 0 failed
 Product Loop Readiness: 100/100 (P4 external-learning-ready)
 ```
 
+The score measures artifact completeness. P4 means the artifacts are ready to capture external learning; it does not prove that external adoption has happened.
+
 ## 6. Review The Case Study
 
 Open [../examples/typing-tutor/README.md](../examples/typing-tutor/README.md).
@@ -94,7 +96,7 @@ node examples/typing-tutor/prototype/scoring.test.js
 
 - The framework is not just prose; it has artifacts and checks.
 - The validator distinguishes initialized templates from agent-ready product work.
-- The score explains product-loop maturity without replacing the strict validator.
+- The score explains artifact maturity without replacing the strict validator or external adoption evidence.
 - The case study records evidence rather than asking reviewers to trust a narrative.
 - The external adoption loop is the next proof point: [external-adoption-loop.md](external-adoption-loop.md).
 - The next missing proof is external use, not more local documentation.
